@@ -1,0 +1,749 @@
+
+
+
+78K0R Linker V1.80                            Date: 4 Sep 2020 Page:   1
+
+Command:   -yC:\Program Files (x86)\Renesas Electronics\CS+\CACX\Device\
+           RL78\Devicefile -_msgoff -oDefaultBuild\IntelliTap_Applicatio
+           n.lmf -gi00000000000000000000h -go04h,7E00h,0 -gb7AFFF8H -mi0
+            -s -pDefaultBuild\IntelliTap_Application.map C:\Program File
+           s (x86)\Renesas Electronics\CS+\CACX\CA78K0R\V1.72\lib78k0r\s
+           0rll.rel DefaultBuild\r_main.rel DefaultBuild\r_systeminit.re
+           l DefaultBuild\r_cg_cgc.rel DefaultBuild\r_cg_cgc_user.rel De
+           faultBuild\r_cg_port.rel DefaultBuild\r_cg_port_user.rel Defa
+           ultBuild\r_cg_serial.rel DefaultBuild\r_cg_serial_user.rel De
+           faultBuild\r_cg_timer.rel DefaultBuild\r_cg_timer_user.rel De
+           faultBuild\r_cg_wdt.rel DefaultBuild\r_cg_wdt_user.rel Defaul
+           tBuild\r_miscellaneous_functions.rel DefaultBuild\r_iic_beaco
+           n_handler.rel DefaultBuild\r_aes_handler.rel DefaultBuild\r_m
+           odule_handler.rel DefaultBuild\r_nfc_handler.rel DefaultBuild
+           \r_iso14443_handler.rel DefaultBuild\r_iso15693_handler.rel D
+           efaultBuild\r_acl_handler.rel -bcl78m -bcl78mf -iC:\Program F
+           iles (x86)\Renesas Electronics\CS+\CACX\CA78K0R\V1.72\lib78k0
+           r
+Para-file:
+Out-file:  DefaultBuild\IntelliTap_Application.lmf
+Map-file:  DefaultBuild\IntelliTap_Application.map
+Direc-file:
+Directive:
+
+
+*** Link information ***
+
+    49 output segment(s)
+ 3C56H byte(s) real data
+  4507 symbol(s) defined
+
+
+*** Memory map ***
+
+
+  SPACE=REGULAR
+
+  MEMORY=ROM
+  BASE ADDRESS=00000H   SIZE=08000H
+         OUTPUT   INPUT    INPUT      BASE      SIZE
+         SEGMENT  SEGMENT  MODULE     ADDRESS
+         @@VECT00                     00000H    00002H  CSEG AT
+                  @@VECT00 @cstart    00000H    00002H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  @cstart    00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_main     00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_systeminit
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_cg_cgc   00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_cg_cgc_user
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_cg_port
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_cg_port_user
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_cg_serial
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_cg_serial_user
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_cg_timer
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_cg_timer_user
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_cg_wdt   00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_cg_wdt_user
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_miscellaneous_functions
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_iic_beacon_handler
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_aes_handler
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_module_handler
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_nfc_handler
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_iso14443_handler
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_iso15693_handler
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_acl_handler
+                                      00002H    00000H
+         @@RLINIT                     00002H    00000H  CSEG UNIT64KP
+                  @@RLINIT @cstart    00002H    00000H
+                  @@RLINIT r_main     00002H    00000H
+                  @@RLINIT r_systeminit
+                                      00002H    00000H
+                  @@RLINIT r_cg_cgc   00002H    00000H
+                  @@RLINIT r_cg_cgc_user
+                                      00002H    00000H
+                  @@RLINIT r_cg_port
+                                      00002H    00000H
+                  @@RLINIT r_cg_port_user
+                                      00002H    00000H
+                  @@RLINIT r_cg_serial
+                                      00002H    00000H
+                  @@RLINIT r_cg_serial_user
+                                      00002H    00000H
+                  @@RLINIT r_cg_timer
+                                      00002H    00000H
+                  @@RLINIT r_cg_timer_user
+                                      00002H    00000H
+                  @@RLINIT r_cg_wdt   00002H    00000H
+                  @@RLINIT r_cg_wdt_user
+                                      00002H    00000H
+                  @@RLINIT r_miscellaneous_functions
+                                      00002H    00000H
+                  @@RLINIT r_iic_beacon_handler
+                                      00002H    00000H
+                  @@RLINIT r_aes_handler
+                                      00002H    00000H
+                  @@RLINIT r_module_handler
+                                      00002H    00000H
+                  @@RLINIT r_nfc_handler
+                                      00002H    00000H
+                  @@RLINIT r_iso14443_handler
+                                      00002H    00000H
+                  @@RLINIT r_iso15693_handler
+                                      00002H    00000H
+                  @@RLINIT r_acl_handler
+                                      00002H    00000H
+                  @@RLINIT @rom       00002H    00000H
+         @@R_INIS                     00002H    00000H  CSEG UNIT64KP
+                  @@R_INIS @cstart    00002H    00000H
+                  @@R_INIS r_main     00002H    00000H
+                  @@R_INIS r_systeminit
+                                      00002H    00000H
+                  @@R_INIS r_cg_cgc   00002H    00000H
+                  @@R_INIS r_cg_cgc_user
+                                      00002H    00000H
+                  @@R_INIS r_cg_port
+                                      00002H    00000H
+                  @@R_INIS r_cg_port_user
+                                      00002H    00000H
+                  @@R_INIS r_cg_serial
+                                      00002H    00000H
+                  @@R_INIS r_cg_serial_user
+                                      00002H    00000H
+                  @@R_INIS r_cg_timer
+                                      00002H    00000H
+                  @@R_INIS r_cg_timer_user
+                                      00002H    00000H
+                  @@R_INIS r_cg_wdt   00002H    00000H
+                  @@R_INIS r_cg_wdt_user
+                                      00002H    00000H
+                  @@R_INIS r_miscellaneous_functions
+                                      00002H    00000H
+                  @@R_INIS r_iic_beacon_handler
+                                      00002H    00000H
+                  @@R_INIS r_aes_handler
+                                      00002H    00000H
+                  @@R_INIS r_module_handler
+                                      00002H    00000H
+                  @@R_INIS r_nfc_handler
+                                      00002H    00000H
+                  @@R_INIS r_iso14443_handler
+                                      00002H    00000H
+                  @@R_INIS r_iso15693_handler
+                                      00002H    00000H
+                  @@R_INIS r_acl_handler
+                                      00002H    00000H
+                  @@R_INIS @rom       00002H    00000H
+         @@CALT                       00002H    00000H  CSEG
+                  @@CALT   @cstart    00002H    00000H
+                  @@CALT   r_main     00002H    00000H
+                  @@CALT   r_systeminit
+                                      00002H    00000H
+                  @@CALT   r_cg_cgc   00002H    00000H
+                  @@CALT   r_cg_cgc_user
+                                      00002H    00000H
+                  @@CALT   r_cg_port
+                                      00002H    00000H
+                  @@CALT   r_cg_port_user
+                                      00002H    00000H
+                  @@CALT   r_cg_serial
+                                      00002H    00000H
+                  @@CALT   r_cg_serial_user
+                                      00002H    00000H
+                  @@CALT   r_cg_timer
+                                      00002H    00000H
+                  @@CALT   r_cg_timer_user
+                                      00002H    00000H
+                  @@CALT   r_cg_wdt   00002H    00000H
+                  @@CALT   r_cg_wdt_user
+                                      00002H    00000H
+                  @@CALT   r_miscellaneous_functions
+                                      00002H    00000H
+                  @@CALT   r_iic_beacon_handler
+                                      00002H    00000H
+                  @@CALT   r_aes_handler
+                                      00002H    00000H
+                  @@CALT   r_module_handler
+                                      00002H    00000H
+                  @@CALT   r_nfc_handler
+                                      00002H    00000H
+                  @@CALT   r_iso14443_handler
+                                      00002H    00000H
+                  @@CALT   r_iso15693_handler
+                                      00002H    00000H
+                  @@CALT   r_acl_handler
+                                      00002H    00000H
+         ??NMIROM                     00002H    00002H  CSEG
+         @@R_INIT                     00004H    00006H  CSEG UNIT64KP
+                  @@R_INIT @cstart    00004H    00000H
+                  @@R_INIT r_main     00004H    00002H
+                  @@R_INIT r_systeminit
+                                      00006H    00000H
+                  @@R_INIT r_cg_cgc   00006H    00000H
+                  @@R_INIT r_cg_cgc_user
+                                      00006H    00000H
+                  @@R_INIT r_cg_port
+                                      00006H    00000H
+                  @@R_INIT r_cg_port_user
+                                      00006H    00000H
+                  @@R_INIT r_cg_serial
+                                      00006H    00000H
+                  @@R_INIT r_cg_serial_user
+                                      00006H    00000H
+                  @@R_INIT r_cg_timer
+                                      00006H    00000H
+                  @@R_INIT r_cg_timer_user
+                                      00006H    00002H
+                  @@R_INIT r_cg_wdt   00008H    00000H
+                  @@R_INIT r_cg_wdt_user
+                                      00008H    00000H
+                  @@R_INIT r_miscellaneous_functions
+                                      00008H    00000H
+                  @@R_INIT r_iic_beacon_handler
+                                      00008H    00002H
+                  @@R_INIT r_aes_handler
+                                      0000AH    00000H
+                  @@R_INIT r_module_handler
+                                      0000AH    00000H
+                  @@R_INIT r_nfc_handler
+                                      0000AH    00000H
+                  @@R_INIT r_iso14443_handler
+                                      0000AH    00000H
+                  @@R_INIT r_iso15693_handler
+                                      0000AH    00000H
+                  @@R_INIT r_acl_handler
+                                      0000AH    00000H
+                  @@R_INIT @rom       0000AH    00000H
+* gap *                               0000AH    00014H
+         @@VECT1E                     0001EH    00004H  CSEG AT
+                  @@VECT1E r_cg_serial_user
+                                      0001EH    00004H
+* gap *                               00022H    00004H
+         @@VECT26                     00026H    00002H  CSEG AT
+                  @@VECT26 r_cg_serial_user
+                                      00026H    00002H
+* gap *                               00028H    00002H
+         @@VECT2A                     0002AH    00002H  CSEG AT
+                  @@VECT2A r_cg_serial_user
+                                      0002AH    00002H
+         @@VECT2C                     0002CH    00002H  CSEG AT
+                  @@VECT2C r_cg_timer_user
+                                      0002CH    00002H
+* gap *                               0002EH    00092H
+         ?CSEGOB0                     000C0H    00004H  CSEG OPT_BYTE
+         @@CODE                       000C4H    00000H  CSEG BASE
+                  @@CODE   r_main     000C4H    00000H
+                  @@CODE   r_systeminit
+                                      000C4H    00000H
+                  @@CODE   r_cg_cgc   000C4H    00000H
+                  @@CODE   r_cg_cgc_user
+                                      000C4H    00000H
+                  @@CODE   r_cg_port
+                                      000C4H    00000H
+                  @@CODE   r_cg_port_user
+                                      000C4H    00000H
+                  @@CODE   r_cg_serial
+                                      000C4H    00000H
+                  @@CODE   r_cg_serial_user
+                                      000C4H    00000H
+                  @@CODE   r_cg_timer
+                                      000C4H    00000H
+                  @@CODE   r_cg_timer_user
+                                      000C4H    00000H
+                  @@CODE   r_cg_wdt   000C4H    00000H
+                  @@CODE   r_cg_wdt_user
+                                      000C4H    00000H
+                  @@CODE   r_miscellaneous_functions
+                                      000C4H    00000H
+                  @@CODE   r_iic_beacon_handler
+                                      000C4H    00000H
+                  @@CODE   r_aes_handler
+                                      000C4H    00000H
+                  @@CODE   r_module_handler
+                                      000C4H    00000H
+                  @@CODE   r_nfc_handler
+                                      000C4H    00000H
+                  @@CODE   r_iso14443_handler
+                                      000C4H    00000H
+                  @@CODE   r_iso15693_handler
+                                      000C4H    00000H
+                  @@CODE   r_acl_handler
+                                      000C4H    00000H
+         ?CSEGSI                      000C4H    0000AH  CSEG
+         ?OCDSTAD                     000CEH    0000AH  CSEG
+         @@LCODE                      000D8H    000E5H  CSEG BASE
+                  @@LCODE  @cstart    000D8H    000ADH
+                  @@LCODE  @divuw     00185H    00017H
+                  @@LCODE  @lmul      0019CH    00021H
+         @@BASE                       001BDH    001EEH  CSEG BASE
+                  @@BASE   r_main     001BDH    00000H
+                  @@BASE   r_systeminit
+                                      001BDH    00000H
+                  @@BASE   r_cg_cgc   001BDH    00000H
+                  @@BASE   r_cg_cgc_user
+                                      001BDH    00000H
+                  @@BASE   r_cg_port
+                                      001BDH    00000H
+                  @@BASE   r_cg_port_user
+                                      001BDH    00000H
+                  @@BASE   r_cg_serial
+                                      001BDH    00000H
+                  @@BASE   r_cg_serial_user
+                                      001BDH    00197H
+                  @@BASE   r_cg_timer
+                                      00354H    00000H
+                  @@BASE   r_cg_timer_user
+                                      00354H    00057H
+                  @@BASE   r_cg_wdt   003ABH    00000H
+                  @@BASE   r_cg_wdt_user
+                                      003ABH    00000H
+                  @@BASE   r_miscellaneous_functions
+                                      003ABH    00000H
+                  @@BASE   r_iic_beacon_handler
+                                      003ABH    00000H
+                  @@BASE   r_aes_handler
+                                      003ABH    00000H
+                  @@BASE   r_module_handler
+                                      003ABH    00000H
+                  @@BASE   r_nfc_handler
+                                      003ABH    00000H
+                  @@BASE   r_iso14443_handler
+                                      003ABH    00000H
+                  @@BASE   r_iso15693_handler
+                                      003ABH    00000H
+                  @@BASE   r_acl_handler
+                                      003ABH    00000H
+         @@LCODEL                     003ABH    000FAH  CSEG
+                  @@LCODEL @stkinit   003ABH    00044H
+                  @@LCODEL exit       003EFH    0001CH
+                  @@LCODEL rand       0040BH    00040H
+                  @@LCODEL srand      0044BH    00008H
+                  @@LCODEL memcpy_n   00453H    0001AH
+                  @@LCODEL memcmp_n   0046DH    0001FH
+                  @@LCODEL memset_n   0048CH    00019H
+* gap *                               004A5H    01B5BH
+         @@CNST                       02000H    002CEH  CSEG MIRRORP
+                  @@CNST   @cstart    02000H    00000H
+                  @@CNST   r_main     02000H    00028H
+                  @@CNST   r_systeminit
+                                      02028H    00000H
+                  @@CNST   r_cg_cgc   02028H    00000H
+                  @@CNST   r_cg_cgc_user
+                                      02028H    00000H
+                  @@CNST   r_cg_port
+                                      02028H    00000H
+                  @@CNST   r_cg_port_user
+                                      02028H    00000H
+                  @@CNST   r_cg_serial
+                                      02028H    00000H
+                  @@CNST   r_cg_serial_user
+                                      02028H    00008H
+                  @@CNST   r_cg_timer
+                                      02030H    00000H
+                  @@CNST   r_cg_timer_user
+                                      02030H    00000H
+                  @@CNST   r_cg_wdt   02030H    00000H
+                  @@CNST   r_cg_wdt_user
+                                      02030H    00000H
+                  @@CNST   r_miscellaneous_functions
+                                      02030H    00000H
+                  @@CNST   r_iic_beacon_handler
+                                      02030H    0000AH
+                  @@CNST   r_aes_handler
+                                      0203AH    0020CH
+                  @@CNST   r_module_handler
+                                      02246H    00000H
+                  @@CNST   r_nfc_handler
+                                      02246H    00004H
+                  @@CNST   r_iso14443_handler
+                                      0224AH    0006CH
+                  @@CNST   r_iso15693_handler
+                                      022B6H    00018H
+                  @@CNST   r_acl_handler
+                                      022CEH    00000H
+         @@CODEL                      022CEH    0358FH  CSEG
+                  @@CODEL  r_main     022CEH    00144H
+                  @@CODEL  r_systeminit
+                                      02412H    00047H
+                  @@CODEL  r_cg_cgc   02459H    00010H
+                  @@CODEL  r_cg_cgc_user
+                                      02469H    00005H
+                  @@CODEL  r_cg_port
+                                      0246EH    0001BH
+                  @@CODEL  r_cg_port_user
+                                      02489H    00000H
+                  @@CODEL  r_cg_serial
+                                      02489H    002B3H
+                  @@CODEL  r_cg_serial_user
+                                      0273CH    001A8H
+                  @@CODEL  r_cg_timer
+                                      028E4H    00077H
+                  @@CODEL  r_cg_timer_user
+                                      0295BH    00000H
+                  @@CODEL  r_cg_wdt   0295BH    0000BH
+                  @@CODEL  r_cg_wdt_user
+                                      02966H    00000H
+                  @@CODEL  r_miscellaneous_functions
+                                      02966H    00111H
+                  @@CODEL  r_iic_beacon_handler
+                                      02A77H    00414H
+                  @@CODEL  r_aes_handler
+                                      02E8BH    00A88H
+                  @@CODEL  r_module_handler
+                                      03913H    00719H
+                  @@CODEL  r_nfc_handler
+                                      0402CH    0014CH
+                  @@CODEL  r_iso14443_handler
+                                      04178H    0063CH
+                  @@CODEL  r_iso15693_handler
+                                      047B4H    000F2H
+                  @@CODEL  r_acl_handler
+                                      048A6H    00FB7H
+* gap *                               0585DH    027A3H
+
+  MEMORY=RAM
+  BASE ADDRESS=FEF00H   SIZE=01100H
+         OUTPUT   INPUT    INPUT      BASE      SIZE
+         SEGMENT  SEGMENT  MODULE     ADDRESS
+         @@DATA                       FEF00H    00C5AH  DSEG BASEP
+                  @@DATA   @cstart    FEF00H    000BAH
+                  @@DATA   r_main     FEFBAH    00B76H
+                  @@DATA   r_systeminit
+                                      FFB30H    00000H
+                  @@DATA   r_cg_cgc   FFB30H    00000H
+                  @@DATA   r_cg_cgc_user
+                                      FFB30H    00000H
+                  @@DATA   r_cg_port
+                                      FFB30H    00000H
+                  @@DATA   r_cg_port_user
+                                      FFB30H    00000H
+                  @@DATA   r_cg_serial
+                                      FFB30H    00022H
+                  @@DATA   r_cg_serial_user
+                                      FFB52H    00000H
+                  @@DATA   r_cg_timer
+                                      FFB52H    00000H
+                  @@DATA   r_cg_timer_user
+                                      FFB52H    00000H
+                  @@DATA   r_cg_wdt   FFB52H    00000H
+                  @@DATA   r_cg_wdt_user
+                                      FFB52H    00000H
+                  @@DATA   r_miscellaneous_functions
+                                      FFB52H    00000H
+                  @@DATA   r_iic_beacon_handler
+                                      FFB52H    00000H
+                  @@DATA   r_aes_handler
+                                      FFB52H    00000H
+                  @@DATA   r_module_handler
+                                      FFB52H    00000H
+                  @@DATA   r_nfc_handler
+                                      FFB52H    00008H
+                  @@DATA   r_iso14443_handler
+                                      FFB5AH    00000H
+                  @@DATA   r_iso15693_handler
+                                      FFB5AH    00000H
+                  @@DATA   r_acl_handler
+                                      FFB5AH    00000H
+                  @@DATA   @rom       FFB5AH    00000H
+         @@INIT                       FFB5AH    00006H  DSEG BASEP
+                  @@INIT   @cstart    FFB5AH    00000H
+                  @@INIT   r_main     FFB5AH    00002H
+                  @@INIT   r_systeminit
+                                      FFB5CH    00000H
+                  @@INIT   r_cg_cgc   FFB5CH    00000H
+                  @@INIT   r_cg_cgc_user
+                                      FFB5CH    00000H
+                  @@INIT   r_cg_port
+                                      FFB5CH    00000H
+                  @@INIT   r_cg_port_user
+                                      FFB5CH    00000H
+                  @@INIT   r_cg_serial
+                                      FFB5CH    00000H
+                  @@INIT   r_cg_serial_user
+                                      FFB5CH    00000H
+                  @@INIT   r_cg_timer
+                                      FFB5CH    00000H
+                  @@INIT   r_cg_timer_user
+                                      FFB5CH    00002H
+                  @@INIT   r_cg_wdt   FFB5EH    00000H
+                  @@INIT   r_cg_wdt_user
+                                      FFB5EH    00000H
+                  @@INIT   r_miscellaneous_functions
+                                      FFB5EH    00000H
+                  @@INIT   r_iic_beacon_handler
+                                      FFB5EH    00002H
+                  @@INIT   r_aes_handler
+                                      FFB60H    00000H
+                  @@INIT   r_module_handler
+                                      FFB60H    00000H
+                  @@INIT   r_nfc_handler
+                                      FFB60H    00000H
+                  @@INIT   r_iso14443_handler
+                                      FFB60H    00000H
+                  @@INIT   r_iso15693_handler
+                                      FFB60H    00000H
+                  @@INIT   r_acl_handler
+                                      FFB60H    00000H
+                  @@INIT   @rom       FFB60H    00000H
+         @@INIS                       FFB60H    00000H  DSEG UNITP
+                  @@INIS   @cstart    FFB60H    00000H
+                  @@INIS   r_main     FFB60H    00000H
+                  @@INIS   r_systeminit
+                                      FFB60H    00000H
+                  @@INIS   r_cg_cgc   FFB60H    00000H
+                  @@INIS   r_cg_cgc_user
+                                      FFB60H    00000H
+                  @@INIS   r_cg_port
+                                      FFB60H    00000H
+                  @@INIS   r_cg_port_user
+                                      FFB60H    00000H
+                  @@INIS   r_cg_serial
+                                      FFB60H    00000H
+                  @@INIS   r_cg_serial_user
+                                      FFB60H    00000H
+                  @@INIS   r_cg_timer
+                                      FFB60H    00000H
+                  @@INIS   r_cg_timer_user
+                                      FFB60H    00000H
+                  @@INIS   r_cg_wdt   FFB60H    00000H
+                  @@INIS   r_cg_wdt_user
+                                      FFB60H    00000H
+                  @@INIS   r_miscellaneous_functions
+                                      FFB60H    00000H
+                  @@INIS   r_iic_beacon_handler
+                                      FFB60H    00000H
+                  @@INIS   r_aes_handler
+                                      FFB60H    00000H
+                  @@INIS   r_module_handler
+                                      FFB60H    00000H
+                  @@INIS   r_nfc_handler
+                                      FFB60H    00000H
+                  @@INIS   r_iso14443_handler
+                                      FFB60H    00000H
+                  @@INIS   r_iso15693_handler
+                                      FFB60H    00000H
+                  @@INIS   r_acl_handler
+                                      FFB60H    00000H
+                  @@INIS   @rom       FFB60H    00000H
+         @@DATS                       FFB60H    00000H  DSEG UNITP
+                  @@DATS   @cstart    FFB60H    00000H
+                  @@DATS   r_main     FFB60H    00000H
+                  @@DATS   r_systeminit
+                                      FFB60H    00000H
+                  @@DATS   r_cg_cgc   FFB60H    00000H
+                  @@DATS   r_cg_cgc_user
+                                      FFB60H    00000H
+                  @@DATS   r_cg_port
+                                      FFB60H    00000H
+                  @@DATS   r_cg_port_user
+                                      FFB60H    00000H
+                  @@DATS   r_cg_serial
+                                      FFB60H    00000H
+                  @@DATS   r_cg_serial_user
+                                      FFB60H    00000H
+                  @@DATS   r_cg_timer
+                                      FFB60H    00000H
+                  @@DATS   r_cg_timer_user
+                                      FFB60H    00000H
+                  @@DATS   r_cg_wdt   FFB60H    00000H
+                  @@DATS   r_cg_wdt_user
+                                      FFB60H    00000H
+                  @@DATS   r_miscellaneous_functions
+                                      FFB60H    00000H
+                  @@DATS   r_iic_beacon_handler
+                                      FFB60H    00000H
+                  @@DATS   r_aes_handler
+                                      FFB60H    00000H
+                  @@DATS   r_module_handler
+                                      FFB60H    00000H
+                  @@DATS   r_nfc_handler
+                                      FFB60H    00000H
+                  @@DATS   r_iso14443_handler
+                                      FFB60H    00000H
+                  @@DATS   r_iso15693_handler
+                                      FFB60H    00000H
+                  @@DATS   r_acl_handler
+                                      FFB60H    00000H
+                  @@DATS   @rom       FFB60H    00000H
+         @@INITL                      FFB60H    00000H  DSEG UNIT64KP
+                  @@INITL  @cstart    FFB60H    00000H
+                  @@INITL  r_main     FFB60H    00000H
+                  @@INITL  r_systeminit
+                                      FFB60H    00000H
+                  @@INITL  r_cg_cgc   FFB60H    00000H
+                  @@INITL  r_cg_cgc_user
+                                      FFB60H    00000H
+                  @@INITL  r_cg_port
+                                      FFB60H    00000H
+                  @@INITL  r_cg_port_user
+                                      FFB60H    00000H
+                  @@INITL  r_cg_serial
+                                      FFB60H    00000H
+                  @@INITL  r_cg_serial_user
+                                      FFB60H    00000H
+                  @@INITL  r_cg_timer
+                                      FFB60H    00000H
+                  @@INITL  r_cg_timer_user
+                                      FFB60H    00000H
+                  @@INITL  r_cg_wdt   FFB60H    00000H
+                  @@INITL  r_cg_wdt_user
+                                      FFB60H    00000H
+                  @@INITL  r_miscellaneous_functions
+                                      FFB60H    00000H
+                  @@INITL  r_iic_beacon_handler
+                                      FFB60H    00000H
+                  @@INITL  r_aes_handler
+                                      FFB60H    00000H
+                  @@INITL  r_module_handler
+                                      FFB60H    00000H
+                  @@INITL  r_nfc_handler
+                                      FFB60H    00000H
+                  @@INITL  r_iso14443_handler
+                                      FFB60H    00000H
+                  @@INITL  r_iso15693_handler
+                                      FFB60H    00000H
+                  @@INITL  r_acl_handler
+                                      FFB60H    00000H
+                  @@INITL  @rom       FFB60H    00000H
+         @@DATAL                      FFB60H    00000H  DSEG UNIT64KP
+                  @@DATAL  @cstart    FFB60H    00000H
+                  @@DATAL  r_main     FFB60H    00000H
+                  @@DATAL  r_systeminit
+                                      FFB60H    00000H
+                  @@DATAL  r_cg_cgc   FFB60H    00000H
+                  @@DATAL  r_cg_cgc_user
+                                      FFB60H    00000H
+                  @@DATAL  r_cg_port
+                                      FFB60H    00000H
+                  @@DATAL  r_cg_port_user
+                                      FFB60H    00000H
+                  @@DATAL  r_cg_serial
+                                      FFB60H    00000H
+                  @@DATAL  r_cg_serial_user
+                                      FFB60H    00000H
+                  @@DATAL  r_cg_timer
+                                      FFB60H    00000H
+                  @@DATAL  r_cg_timer_user
+                                      FFB60H    00000H
+                  @@DATAL  r_cg_wdt   FFB60H    00000H
+                  @@DATAL  r_cg_wdt_user
+                                      FFB60H    00000H
+                  @@DATAL  r_miscellaneous_functions
+                                      FFB60H    00000H
+                  @@DATAL  r_iic_beacon_handler
+                                      FFB60H    00000H
+                  @@DATAL  r_aes_handler
+                                      FFB60H    00000H
+                  @@DATAL  r_module_handler
+                                      FFB60H    00000H
+                  @@DATAL  r_nfc_handler
+                                      FFB60H    00000H
+                  @@DATAL  r_iso14443_handler
+                                      FFB60H    00000H
+                  @@DATAL  r_iso15693_handler
+                                      FFB60H    00000H
+                  @@DATAL  r_acl_handler
+                                      FFB60H    00000H
+                  @@DATAL  @rom       FFB60H    00000H
+         @@BITS                       FFB60H    00000H  BSEG
+                  @@BITS   @cstart    FFB60H.0  00000H.0
+                  @@BITS   r_main     FFB60H.0  00000H.0
+                  @@BITS   r_systeminit
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_cg_cgc   FFB60H.0  00000H.0
+                  @@BITS   r_cg_cgc_user
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_cg_port
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_cg_port_user
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_cg_serial
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_cg_serial_user
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_cg_timer
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_cg_timer_user
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_cg_wdt   FFB60H.0  00000H.0
+                  @@BITS   r_cg_wdt_user
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_miscellaneous_functions
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_iic_beacon_handler
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_aes_handler
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_module_handler
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_nfc_handler
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_iso14443_handler
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_iso15693_handler
+                                      FFB60H.0  00000H.0
+                  @@BITS   r_acl_handler
+                                      FFB60H.0  00000H.0
+* gap *                               FFB60H    00374H
+         @@SEGREG                     FFED4H    00004H  DSEG AT
+                  @@SEGREG @SEGREG    FFED4H    00004H
+         @@RTARG0                     FFED8H    00008H  DSEG AT
+                  @@RTARG0 @RTARG0    FFED8H    00008H
+* gap *                               FFEE0H    00020H
+* gap (Not Free Area) *               FFF00H    00100H
+
+
+ Target chip : R5F104BC
+ Device file : V2.30
+

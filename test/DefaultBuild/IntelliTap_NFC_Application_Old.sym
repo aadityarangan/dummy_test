@@ -1,0 +1,287 @@
+#05
+;FF     PUBLIC
+02FFED8@@CPR1
+02FFEDE@@FPRF1
+02FFEDF@@FPRF2
+02FFEDE@@FPRFP
+02FFED8@@FPRS
+02FFEDC@@FPRXD
+02FFEDC@@FPRXP
+02FFEDD@@FPRXS
+0103B7B@@divuw
+0103B7B@@divuwe
+0103B92@@lsmul
+0103B92@@lumul
+02FFB5A_?DATA
+02FFB60_?DATAL
+02FFB60_?DATS
+02FFB60_?INIS
+02FFB60_?INIT
+02FFB60_?INITL
+0103D9D_?RLINIT
+0103D9D_?R_INIS
+0103DA4_?R_INIT
+02FEF98_@BRKADR
+02FEF86_@DIVR
+02FEF80_@FNCENT
+02FEF00_@FNCTBL
+02FEF8A_@LDIVR
+0000000_@MAA
+02FEFBA_@MEMBTM
+02FEF9A_@MEMTOP
+02FFED8_@RTARG0
+02FFED9_@RTARG1
+02FFEDA_@RTARG2
+02FFEDB_@RTARG3
+02FFEDC_@RTARG4
+02FFEDD_@RTARG5
+02FFEDE_@RTARG6
+02FFEDF_@RTARG7
+01FFE20_@SADBEG
+00000C0_@SADSIZ
+02FEF82_@SEED
+02FFED4_@SEGAX
+02FFED5_@SEGBC
+02FFED6_@SEGDE
+02FFED7_@SEGHL
+00FFC00_@STBEG
+00FFB60_@STEND
+02FEF92_@TOKPTR
+0103B7B_@cend
+0103ACE_@cstart
+010001E_@vect1e
+0100020_@vect20
+0100026_@vect26
+010002A_@vect2a
+010002C_@vect2c
+02FF81A_ACLTable
+01064A5_ACL_Book_Keeping
+01066B2_ACL_Search
+0105377_AES_CBC_decrypt
+0105322_AES_CBC_encrypt
+0104AE0_AES_init_ctx_iv
+0106745_Add_ACL_Entry
+0106A62_Add_Configure_Tag_Entry
+0107202_Attach_Action_Notifications
+0105975_Attach_Command_Response
+0107150_Check_Broadcast_Action_Notifications
+0106E8C_Check_Edge_Action_Notifications
+0104521_Check_In_Range
+010637C_Check_User_Permissions
+010449A_Checksum8
+0106DA4_Clear_ACL_Table
+010443B_Compute_CRC16
+01044CD_Create_Rand_Seed
+0103E57_Debug_Init
+0103EDF_Debug_Routine
+0103800_DefaultPrimaryAESKey
+0103810_DefaultSecondaryAESKey
+0106CF1_Delete_ACL_Entry
+01063EA_Delete_Expired_Entries
+02FEFBA_Device
+0103E32_Device_Init
+0105FB8_Exit_ISO14443_Handler
+0106366_Exit_ISO15693_Handler
+02FFB52_Flag
+0105215_Get_Random_Iv
+0103ABC_Get_System_Information_Command
+02FF004_I2C
+010454C_IICA_Beacon_Parser_Handler
+01045D6_IICA_Beacon_Receive_Handler
+0103A5C_ISO14443_Anti_Collision_1_Command
+0103A68_ISO14443_Anti_Collision_2_Command
+0103A74_ISO14443_Halt_Command
+0105C4E_ISO14443_Handler
+0105E01_ISO14443_Parser
+0103A4F_ISO14443_Protocol_Select_Command
+0103A57_ISO14443_Request_For_Answer_Command
+0103A62_ISO14443_Select_1_Command_Head
+0103A67_ISO14443_Select_1_Command_Tail
+0103A6E_ISO14443_Select_2_Command_Head
+0103A73_ISO14443_Select_2_Command_Tail
+0103AC6_ISO15693_Adjust_Index_Mod_Gain_Command
+010628A_ISO15693_Handler
+0106312_ISO15693_Parser
+0103AC1_ISO15693_Protocol_Select_Command
+0103A9F_Mifare_UL_EV1_Bulk_Configure
+0103A86_Mifare_UL_EV1_Get_Version
+0103A7F_Mifare_UL_EV1_Memory_Read
+0103A8B_Mifare_UL_EV1_Page_Write
+0103A7A_Mifare_UL_EV1_Password_Autheticate_Head
+0103A7E_Mifare_UL_EV1_Password_Autheticate_Tail
+0103A95_Mifare_UL_EV1_Sample_Write
+010582F_Module_Handler
+0103A46_NFC_ID_Query_Command
+0105B02_NFC_Init
+0103A49_NFC_Read_Command
+0105B35_NFC_Request
+02FF5F6_Nfc
+0105B4E_Nfc_Communication_Handler
+0105C1D_Nfc_Handler
+0105C4D_Nfc_Process_Handler
+0105C38_Nfc_Profile_Switch
+0103A4A_Nfc_RF_Field_Off
+0103DDA_Operation_Routine
+010464E_Parse_I2C_Beacon
+02FFA86_Permissions
+0103F22_R_Boot_Up
+0103F2F_R_CGC_Create
+0103F3F_R_CGC_Get_ResetSource
+010409B_R_CSI11_Create
+0104143_R_CSI11_Send_Receive
+01040FB_R_CSI11_Start
+0104128_R_CSI11_Stop
+0104187_R_IICA0_Create
+01041F9_R_IICA0_Slave_Receive
+01041E5_R_IICA0_Slave_Send
+01041E0_R_IICA0_Stop
+0103DCB_R_MAIN_UserInit
+0103F44_R_PORT_Create
+0103F5F_R_SAU0_Create
+0103EE8_R_Systeminit
+010440E_R_TAU0_Channel0_Start
+010441F_R_TAU0_Channel0_Stop
+01043B9_R_TAU0_Create
+0103F75_R_UART0_Create
+0104041_R_UART0_Receive
+0104067_R_UART0_Send
+0103FF5_R_UART0_Start
+0104020_R_UART0_Stop
+0104430_R_WDT_Create
+0104437_R_WDT_Restart
+0103AB6_Request_Inventory_Command
+010439C_SPI_Send_Receive
+02FF208_Spi
+0105A55_Status_Response
+0105A8C_Test_Module
+0103E31_Untimed_Functions
+0106E27_Update_Action_Notification_Queue
+0106DB4_Update_Permissions
+0104573_Validate_IICA_Beacon_Header
+01064AD_confirm_acl_search_filter
+02FFB5B_debug
+02FEF96_errno
+0107377_exit
+02FFB5E_flag
+02FFB3E_g_csi11_rx_count
+02FFB3C_g_csi11_rx_length
+02FFB42_g_csi11_send_length
+02FFB44_g_csi11_tx_count
+02FFB46_g_iica0_master_status_flag
+02FFB4C_g_iica0_rx_cnt
+02FFB4A_g_iica0_rx_len
+02FFB47_g_iica0_slave_status_flag
+02FFB50_g_iica0_tx_cnt
+02FFB36_g_uart0_rx_count
+02FFB38_g_uart0_rx_length
+02FFB32_g_uart0_tx_count
+02FFB3A_gp_csi11_rx_address
+02FFB40_gp_csi11_tx_address
+02FFB48_gp_iica0_rx_address
+02FFB4E_gp_iica0_tx_address
+02FFB34_gp_uart0_rx_address
+02FFB30_gp_uart0_tx_address
+0103F0E_hdwinit
+0106005_iso14443_sub_profile_handler
+0103DA4_main
+01073F5_memcmp
+01073F5_memcmp_n
+01073DB_memcpy
+01073DB_memcpy_n
+0107414_memset
+0107414_memset_n
+0106279_mifare_desfire_ev1_parser
+0106268_mifare_desfire_ev2_handler
+0106043_mifare_ultraligth_ev1_handler
+01061AB_mifare_ultraligth_ev1_parser
+0105479_nfc_add_acl_entry_module
+0105714_nfc_bulk_update_acl_table_module
+010543C_nfc_change_aes_key_module
+01056F4_nfc_clear_acl_table_module
+01057D6_nfc_configure_tag_module
+01054C7_nfc_delete_acl_entry_module
+0105404_nfc_device_reboot_module
+0105420_nfc_factory_reset_module
+0105799_nfc_permissions_notify_module
+01053E8_nfc_reader_echo_module
+010581D_nfc_routine_request_module
+02FFB5C_operationcount
+0103F2E_prepare_debug_process_request
+0104330_r_iica0_data_direction_handler
+0103F16_r_start_services
+0107393_rand
+02FFB5A_reset
+01073D3_srand
+0107333_stkinit
+;FF     @cstart
+;FF     r_main
+<0103820L0031
+;FF     r_systeminit
+;FF     r_cg_cgc
+;FF     r_cg_cgc_user
+;FF     r_cg_port
+;FF     r_cg_port_user
+;FF     r_cg_serial
+;FF     r_cg_serial_user
+<0103828L0087
+010424A_iica0_slave_handler
+010422C_r_csi11_callback_error
+010421B_r_csi11_callback_receiveend
+0104239_r_csi11_callback_sendend
+0103C6F_r_csi11_interrupt
+010430E_r_iica0_callback_slave_error
+010431E_r_iica0_callback_slave_receiveend
+0104326_r_iica0_callback_slave_sendend
+0103D0F_r_iica0_interrupt
+0104217_r_uart0_callback_error
+0104211_r_uart0_callback_receiveend
+0104216_r_uart0_callback_sendend
+0104212_r_uart0_callback_softwareoverrun
+0103BB3_r_uart0_interrupt_receive
+0103C2B_r_uart0_interrupt_send
+;FF     r_cg_timer
+;FF     r_cg_timer_user
+<0103D46_r_tau0_channel0_interrupt
+;FF     r_cg_wdt
+;FF     r_cg_wdt_user
+;FF     r_miscellaneous_functions
+;FF     r_iic_beacon_handler
+<0103830L0013
+0103834L0031
+0103836L0032
+;FF     r_aes_handler
+<0104B02_AddRoundKey
+010511E_Cipher
+0105183_InvCipher
+0104E64_InvMixColumns
+010503B_InvShiftRows
+0104FF0_InvSubBytes
+0104960_KeyExpansion
+0104C94_MixColumns
+0104DCA_Multiply
+0103A3A_Rcon
+0104B9C_ShiftRows
+0104B51_SubBytes
+01051E7_XorWithIv
+010393A_rsbox
+010383A_sbox
+0104C80_xtime
+;FF     r_module_handler
+;FF     r_nfc_handler
+;FF     r_iso14443_handler
+;FF     r_iso15693_handler
+;FF     r_acl_handler
+;FF     @divuw
+;FF     @SEGREG
+;FF     @stkinit
+;FF     @RTARG0
+;FF     exit
+;FF     rand
+;FF     @lmul
+;FF     srand
+;FF     memcpy_n
+;FF     memcmp_n
+;FF     memset_n
+;FF     @rom
+=
+
