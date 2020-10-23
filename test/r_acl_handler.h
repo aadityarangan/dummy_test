@@ -33,16 +33,18 @@
 //
 
 /*************************************** Function Prototypes ***************************************/
-void ACL_Book_Keeping(void);
+void ACL_Book_Keeping(uint32_t timereference);
 void Clear_ACL_Table(void);
 uint8_t Add_ACL_Entry(uint8_t *entrydata, uint16_t length, uint16_t *consumedlength);
 uint8_t Delete_ACL_Entry(aclseacrhfilter filter, taginfo info, entrytoken token, uint8_t index);
 uint8_t ACL_Search(taginfo tag, entrytoken token, aclseacrhfilter filter, uint8_t *searchresult, uint8_t *resultcount);
 uint8_t Update_Permissions(uint8_t *data);
 uint8_t Add_Configure_Tag_Entry(uint8_t *entrydata, uint16_t length);
-void Check_Edge_Action_Notifications(void);
+void Check_Edge_Action_Notifications(uint32_t timereference);
 void Attach_Action_Notifications(uint8_t *data, uint8_t *consumed);
-void Check_Broadcast_Action_Notifications(void);
+void Check_Broadcast_Action_Notifications(uint32_t timereference);
+
+
 
 /* End user code. Do not edit comment generated here */
 #endif

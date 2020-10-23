@@ -109,44 +109,47 @@ void NFC_Request(uint8_t *command, uint8_t length)
 * Arguments    : None
 * Return Value : None
 ***********************************************************************************************************************/
-void Nfc_Communication_Handler(void)
+void Nfc_Communication_Handler(uint32_t timereference)
 {
-	R_WDT_Restart();
-	if((Spi.Status == SPI_IDLE) && (!NFC_IRQ_OUT))
+	if(Check_Scheduler_Run_Interval(timereference, 5U))
 	{
-		if(Nfc.Status == NFC_SEND_COMMAND)
+		R_WDT_Restart();
+		if((Spi.Status == SPI_IDLE) && (!NFC_IRQ_OUT))
 		{
-			ENABLE_SPI_CHIP_SELECT_STRETCH;
-			Nfc.Status = NFC_SEND_READ_COMMAND;
-			SPI_Send_Receive(NFC_Read_Command, 1U, 0U);
+			if(Nfc.Status == NFC_SEND_COMMAND)
+			{
+				ENABLE_SPI_CHIP_SELECT_STRETCH;
+				Nfc.Status = NFC_SEND_READ_COMMAND;
+				SPI_Send_Receive(NFC_Read_Command, 1U, 0U);
+			}
+			else if(Nfc.Status == NFC_SEND_READ_COMMAND)
+			{
+				Nfc.Status = NFC_READ_RESPONSE_HEAD;
+				SPI_Send_Receive(0U, NFC_HEAD_SIZE, Spi.Rx.Buffer);
+			}
+			else if(Nfc.Status == NFC_READ_RESPONSE_HEAD)
+			{
+				DISABLE_SPI_CHIP_SELECT_STRETCH;
+				Nfc.Status = NFC_READ_DATA;
+				memcpy(&Nfc.ResultCode, Spi.Rx.Buffer, NFC_RESULT_CODE_SIZE);
+				memcpy(&Spi.Rx.Length, Spi.Rx.Buffer+NFC_RESULT_CODE_SIZE, NFC_RESPONSE_LENGTH_SIZE);
+				
+				if(Spi.Rx.Length)
+					SPI_Send_Receive(0U, Spi.Rx.Length, Spi.Rx.Buffer+2U);
+				else
+					Nfc.Status = NFC_COM_IDLE;
+			}
 		}
-		else if(Nfc.Status == NFC_SEND_READ_COMMAND)
+		else if((Spi.Status == SPI_IDLE) && (NFC_IRQ_OUT))
 		{
-			Nfc.Status = NFC_READ_RESPONSE_HEAD;
-			SPI_Send_Receive(0U, NFC_HEAD_SIZE, Spi.Rx.Buffer);
-		}
-		else if(Nfc.Status == NFC_READ_RESPONSE_HEAD)
-		{
-			DISABLE_SPI_CHIP_SELECT_STRETCH;
-			Nfc.Status = NFC_READ_DATA;
-			memcpy(&Nfc.ResultCode, Spi.Rx.Buffer, NFC_RESULT_CODE_SIZE);
-			memcpy(&Spi.Rx.Length, Spi.Rx.Buffer+NFC_RESULT_CODE_SIZE, NFC_RESPONSE_LENGTH_SIZE);
-			
-			if(Spi.Rx.Length)
-				SPI_Send_Receive(0U, Spi.Rx.Length, Spi.Rx.Buffer+2U);
-			else
+			if((Nfc.Status==NFC_READ_DATA) || (Nfc.Status==NFC_READ_RESPONSE_HEAD))
+			{
+				memcpy(&Nfc.ResultCode, Spi.Rx.Buffer, NFC_RESULT_CODE_SIZE);
+				memcpy(&Spi.Rx.Length, Spi.Rx.Buffer+NFC_RESULT_CODE_SIZE, NFC_RESPONSE_LENGTH_SIZE);
+				SPI_CHIP_SELECT = 1U;
+				DISABLE_SPI_CHIP_SELECT_STRETCH;
 				Nfc.Status = NFC_COM_IDLE;
-		}
-	}
-	else if((Spi.Status == SPI_IDLE) && (NFC_IRQ_OUT))
-	{
-		if((Nfc.Status==NFC_READ_DATA) || (Nfc.Status==NFC_READ_RESPONSE_HEAD))
-		{
-			memcpy(&Nfc.ResultCode, Spi.Rx.Buffer, NFC_RESULT_CODE_SIZE);
-			memcpy(&Spi.Rx.Length, Spi.Rx.Buffer+NFC_RESULT_CODE_SIZE, NFC_RESPONSE_LENGTH_SIZE);
-			SPI_CHIP_SELECT = 1U;
-			DISABLE_SPI_CHIP_SELECT_STRETCH;
-			Nfc.Status = NFC_COM_IDLE;
+			}
 		}
 	}
 }
@@ -157,14 +160,17 @@ void Nfc_Communication_Handler(void)
 * Arguments    : None
 * Return Value : None
 ***********************************************************************************************************************/
-void Nfc_Handler(void)
+void Nfc_Handler(uint32_t timereference)
 {
-	if(Nfc.Status == NFC_COM_IDLE)
+	if(Check_Scheduler_Run_Interval(timereference, 5U))
 	{
-		if(Nfc.SearchProfile == NFC_ISO14443)
-			ISO14443_Handler();
-		else if(Nfc.SearchProfile == NFC_ISO15693)
-			ISO15693_Handler();
+		if(Nfc.Status == NFC_COM_IDLE)
+		{
+			if(Nfc.SearchProfile == NFC_ISO14443)
+				ISO14443_Handler();
+			else if(Nfc.SearchProfile == NFC_ISO15693)
+				ISO15693_Handler();
+		}
 	}
 }
 

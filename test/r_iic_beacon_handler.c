@@ -54,13 +54,16 @@ volatile uint8_t flag = 0;
 * Arguments    : 
 * Return Value : 
 ***********************************************************************************************************************/
-void IICA_Beacon_Parser_Handler(void)
+void IICA_Beacon_Parser_Handler(uint32_t timereference)
 {
-	if(I2C.RxState == IICA_BEACON_RECEIVED)
+	if(Check_Scheduler_Run_Interval(timereference, 10U))
 	{
-		if(!Parse_I2C_Beacon(I2C.Rx.Buffer+IICA_BEACON_HEADER_SIZE, &I2C.Rx.Length, I2C.Tx.Buffer, &I2C.Tx.Length))
-				I2C.TxState = IICA_READY_TO_TRANSMIT;
-		I2C.RxState = IICA_RX_IDLE;
+		if(I2C.RxState == IICA_BEACON_RECEIVED)
+		{
+			if(!Parse_I2C_Beacon(I2C.Rx.Buffer+IICA_BEACON_HEADER_SIZE, &I2C.Rx.Length, I2C.Tx.Buffer, &I2C.Tx.Length))
+					I2C.TxState = IICA_READY_TO_TRANSMIT;
+			I2C.RxState = IICA_RX_IDLE;
+		}
 	}
 }
 

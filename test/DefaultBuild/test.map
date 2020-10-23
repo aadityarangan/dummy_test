@@ -1,7 +1,7 @@
 
 
 
-78K0R Linker V1.80                            Date:19 Oct 2020 Page:   1
+78K0R Linker V1.80                            Date:23 Oct 2020 Page:   1
 
 Command:   -yC:\Program Files (x86)\Renesas Electronics\CS+\CACX\Device\
            RL78\Devicefile -_msgoff -oDefaultBuild\test.lmf -gi000000000
@@ -17,10 +17,10 @@ Command:   -yC:\Program Files (x86)\Renesas Electronics\CS+\CACX\Device\
            el DefaultBuild\r_iic_beacon_handler.rel DefaultBuild\r_aes_h
            andler.rel DefaultBuild\r_module_handler.rel DefaultBuild\r_n
            fc_handler.rel DefaultBuild\r_iso14443_handler.rel DefaultBui
-           ld\r_iso15693_handler.rel DefaultBuild\r_acl_handler.rel -bFS
-           L\fsl.lib -bPFDL\pfdl.lib -bcl0ram.lib -bcl0rm.lib -bcl0rmf.l
-           ib -iC:\Program Files (x86)\Renesas Electronics\CS+\CACX\CA78
-           K0R\V1.72\lib78k0r
+           ld\r_iso15693_handler.rel DefaultBuild\r_acl_handler.rel Defa
+           ultBuild\r_rgb_handler.rel -bFSL\fsl.lib -bPFDL\pfdl.lib -bcl
+           0ram.lib -bcl0rm.lib -bcl0rmf.lib -iC:\Program Files (x86)\Re
+           nesas Electronics\CS+\CACX\CA78K0R\V1.72\lib78k0r
 Para-file:
 Out-file:  DefaultBuild\test.lmf
 Map-file:  DefaultBuild\test.map
@@ -30,9 +30,9 @@ Directive:
 
 *** Link information ***
 
-    51 output segment(s)
- 3E0AH byte(s) real data
-  4556 symbol(s) defined
+    52 output segment(s)
+ 3F54H byte(s) real data
+  4668 symbol(s) defined
 
 
 *** Memory map ***
@@ -105,6 +105,9 @@ Directive:
          @@CNSTL                      00002H    00000H  CSEG PAGE64KP
                   @@CNSTL  r_acl_handler
                                       00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  r_rgb_handler
+                                      00002H    00000H
          @@RLINIT                     00002H    00000H  CSEG UNIT64KP
                   @@RLINIT @cstart    00002H    00000H
                   @@RLINIT r_main     00002H    00000H
@@ -143,6 +146,8 @@ Directive:
                   @@RLINIT r_iso15693_handler
                                       00002H    00000H
                   @@RLINIT r_acl_handler
+                                      00002H    00000H
+                  @@RLINIT r_rgb_handler
                                       00002H    00000H
                   @@RLINIT @rom       00002H    00000H
          @@R_INIS                     00002H    00000H  CSEG UNIT64KP
@@ -184,6 +189,8 @@ Directive:
                                       00002H    00000H
                   @@R_INIS r_acl_handler
                                       00002H    00000H
+                  @@R_INIS r_rgb_handler
+                                      00002H    00000H
                   @@R_INIS @rom       00002H    00000H
          @@CALT                       00002H    00000H  CSEG
                   @@CALT   @cstart    00002H    00000H
@@ -223,6 +230,8 @@ Directive:
                   @@CALT   r_iso15693_handler
                                       00002H    00000H
                   @@CALT   r_acl_handler
+                                      00002H    00000H
+                  @@CALT   r_rgb_handler
                                       00002H    00000H
          ??NMIROM                     00002H    00002H  CSEG
          @@VECT04                     00004H    00002H  CSEG AT
@@ -266,6 +275,8 @@ Directive:
                   @@R_INIT r_iso15693_handler
                                       0000CH    00000H
                   @@R_INIT r_acl_handler
+                                      0000CH    00000H
+                  @@R_INIT r_rgb_handler
                                       0000CH    00000H
                   @@R_INIT @rom       0000CH    00000H
 * gap *                               0000CH    00012H
@@ -327,59 +338,64 @@ Directive:
                                       000C4H    00000H
                   @@CODE   r_acl_handler
                                       000C4H    00000H
+                  @@CODE   r_rgb_handler
+                                      000C4H    00000H
          ?CSEGSI                      000C4H    0000AH  CSEG
          ?OCDSTAD                     000CEH    0000AH  CSEG
-         @@LCODE                      000D8H    0010CH  CSEG BASE
+         @@LCODE                      000D8H    00148H  CSEG BASE
                   @@LCODE  @cstart    000D8H    000ADH
-                  @@LCODE  @divuw     00185H    00034H
-                  @@LCODE  @lmul      001B9H    0002BH
-         @@BASE                       001E4H    001F4H  CSEG BASE
-                  @@BASE   r_main     001E4H    00000H
+                  @@LCODE  @lurem     00185H    0003CH
+                  @@LCODE  @divuw     001C1H    00034H
+                  @@LCODE  @lmul      001F5H    0002BH
+         @@BASE                       00220H    00207H  CSEG BASE
+                  @@BASE   r_main     00220H    00000H
                   @@BASE   r_systeminit
-                                      001E4H    00000H
-                  @@BASE   r_cg_cgc   001E4H    00000H
+                                      00220H    00000H
+                  @@BASE   r_cg_cgc   00220H    00000H
                   @@BASE   r_cg_cgc_user
-                                      001E4H    00000H
+                                      00220H    00000H
                   @@BASE   r_cg_port
-                                      001E4H    00000H
+                                      00220H    00000H
                   @@BASE   r_cg_port_user
-                                      001E4H    00000H
+                                      00220H    00000H
                   @@BASE   r_cg_serial
-                                      001E4H    00000H
+                                      00220H    00000H
                   @@BASE   r_cg_serial_user
-                                      001E4H    00193H
+                                      00220H    00193H
                   @@BASE   r_cg_timer
-                                      00377H    00000H
+                                      003B3H    00000H
                   @@BASE   r_cg_timer_user
-                                      00377H    0005FH
-                  @@BASE   r_cg_wdt   003D6H    00000H
+                                      003B3H    00072H
+                  @@BASE   r_cg_wdt   00425H    00000H
                   @@BASE   r_cg_wdt_user
-                                      003D6H    00002H
+                                      00425H    00002H
                   @@BASE   r_miscellaneous_functions
-                                      003D8H    00000H
+                                      00427H    00000H
                   @@BASE   r_iic_beacon_handler
-                                      003D8H    00000H
+                                      00427H    00000H
                   @@BASE   r_aes_handler
-                                      003D8H    00000H
+                                      00427H    00000H
                   @@BASE   r_module_handler
-                                      003D8H    00000H
+                                      00427H    00000H
                   @@BASE   r_nfc_handler
-                                      003D8H    00000H
+                                      00427H    00000H
                   @@BASE   r_iso14443_handler
-                                      003D8H    00000H
+                                      00427H    00000H
                   @@BASE   r_iso15693_handler
-                                      003D8H    00000H
+                                      00427H    00000H
                   @@BASE   r_acl_handler
-                                      003D8H    00000H
-         @@LCODEL                     003D8H    000FAH  CSEG
-                  @@LCODEL rand       003D8H    00040H
-                  @@LCODEL @stkinit   00418H    00044H
-                  @@LCODEL exit       0045CH    0001CH
-                  @@LCODEL srand      00478H    00008H
-                  @@LCODEL memcpy_n   00480H    0001AH
-                  @@LCODEL memcmp_n   0049AH    0001FH
-                  @@LCODEL memset_n   004B9H    00019H
-* gap *                               004D2H    02B2EH
+                                      00427H    00000H
+                  @@BASE   r_rgb_handler
+                                      00427H    00000H
+         @@LCODEL                     00427H    000FAH  CSEG
+                  @@LCODEL rand       00427H    00040H
+                  @@LCODEL @stkinit   00467H    00044H
+                  @@LCODEL exit       004ABH    0001CH
+                  @@LCODEL srand      004C7H    00008H
+                  @@LCODEL memcpy_n   004CFH    0001AH
+                  @@LCODEL memcmp_n   004E9H    0001FH
+                  @@LCODEL memset_n   00508H    00019H
+* gap *                               00521H    02ADFH
          @@CNST                       03000H    002CEH  CSEG MIRRORP
                   @@CNST   @cstart    03000H    00000H
                   @@CNST   r_main     03000H    00028H
@@ -419,330 +435,348 @@ Directive:
                                       032B6H    00018H
                   @@CNST   r_acl_handler
                                       032CEH    00000H
-         @@CODEL                      032CEH    0370CH  CSEG
-                  @@CODEL  r_main     032CEH    00144H
+                  @@CNST   r_rgb_handler
+                                      032CEH    00000H
+         @@CODEL                      032CEH    03807H  CSEG
+                  @@CODEL  r_main     032CEH    0013EH
                   @@CODEL  r_systeminit
-                                      03412H    00044H
-                  @@CODEL  r_cg_cgc   03456H    00017H
+                                      0340CH    00044H
+                  @@CODEL  r_cg_cgc   03450H    00017H
                   @@CODEL  r_cg_cgc_user
-                                      0346DH    00005H
+                                      03467H    00005H
                   @@CODEL  r_cg_port
-                                      03472H    00020H
+                                      0346CH    00020H
                   @@CODEL  r_cg_port_user
-                                      03492H    00000H
+                                      0348CH    00000H
                   @@CODEL  r_cg_serial
-                                      03492H    002B2H
+                                      0348CH    002B2H
                   @@CODEL  r_cg_serial_user
-                                      03744H    001A8H
+                                      0373EH    001A8H
                   @@CODEL  r_cg_timer
-                                      038ECH    001E2H
+                                      038E6H    001E2H
                   @@CODEL  r_cg_timer_user
-                                      03ACEH    00000H
-                  @@CODEL  r_cg_wdt   03ACEH    00014H
+                                      03AC8H    00000H
+                  @@CODEL  r_cg_wdt   03AC8H    00014H
                   @@CODEL  r_cg_wdt_user
-                                      03AE2H    00000H
+                                      03ADCH    00000H
                   @@CODEL  r_miscellaneous_functions
-                                      03AE2H    00111H
+                                      03ADCH    00141H
                   @@CODEL  r_iic_beacon_handler
-                                      03BF3H    00414H
+                                      03C1DH    0042DH
                   @@CODEL  r_aes_handler
-                                      04007H    00A88H
+                                      0404AH    00A88H
                   @@CODEL  r_module_handler
-                                      04A8FH    0071AH
+                                      04AD2H    0071AH
                   @@CODEL  r_nfc_handler
-                                      051A9H    0014CH
+                                      051ECH    00184H
                   @@CODEL  r_iso14443_handler
-                                      052F5H    0063CH
+                                      05370H    0063CH
                   @@CODEL  r_iso15693_handler
-                                      05931H    000F2H
+                                      059ACH    000F2H
                   @@CODEL  r_acl_handler
-                                      05A23H    00FB7H
-* gap *                               069DAH    39626H
+                                      05A9EH    01005H
+                  @@CODEL  r_rgb_handler
+                                      06AA3H    00032H
+* gap *                               06AD5H    3952BH
 
   MEMORY=RAM
   BASE ADDRESS=FAF00H   SIZE=05100H
          OUTPUT   INPUT    INPUT      BASE      SIZE
          SEGMENT  SEGMENT  MODULE     ADDRESS
-         @@DATA                       FAF00H    00C5AH  DSEG BASEP
+         @@DATA                       FAF00H    00C66H  DSEG BASEP
                   @@DATA   @cstart    FAF00H    000BAH
-                  @@DATA   r_main     FAFBAH    00B76H
+                  @@DATA   r_main     FAFBAH    00B82H
                   @@DATA   r_systeminit
-                                      FBB30H    00000H
-                  @@DATA   r_cg_cgc   FBB30H    00000H
+                                      FBB3CH    00000H
+                  @@DATA   r_cg_cgc   FBB3CH    00000H
                   @@DATA   r_cg_cgc_user
-                                      FBB30H    00000H
+                                      FBB3CH    00000H
                   @@DATA   r_cg_port
-                                      FBB30H    00000H
+                                      FBB3CH    00000H
                   @@DATA   r_cg_port_user
-                                      FBB30H    00000H
+                                      FBB3CH    00000H
                   @@DATA   r_cg_serial
-                                      FBB30H    00022H
+                                      FBB3CH    00022H
                   @@DATA   r_cg_serial_user
-                                      FBB52H    00000H
+                                      FBB5EH    00000H
                   @@DATA   r_cg_timer
-                                      FBB52H    00000H
+                                      FBB5EH    00000H
                   @@DATA   r_cg_timer_user
-                                      FBB52H    00000H
-                  @@DATA   r_cg_wdt   FBB52H    00000H
+                                      FBB5EH    00000H
+                  @@DATA   r_cg_wdt   FBB5EH    00000H
                   @@DATA   r_cg_wdt_user
-                                      FBB52H    00000H
+                                      FBB5EH    00000H
                   @@DATA   r_miscellaneous_functions
-                                      FBB52H    00000H
+                                      FBB5EH    00000H
                   @@DATA   r_iic_beacon_handler
-                                      FBB52H    00000H
+                                      FBB5EH    00000H
                   @@DATA   r_aes_handler
-                                      FBB52H    00000H
+                                      FBB5EH    00000H
                   @@DATA   r_module_handler
-                                      FBB52H    00000H
+                                      FBB5EH    00000H
                   @@DATA   r_nfc_handler
-                                      FBB52H    00008H
+                                      FBB5EH    00008H
                   @@DATA   r_iso14443_handler
-                                      FBB5AH    00000H
+                                      FBB66H    00000H
                   @@DATA   r_iso15693_handler
-                                      FBB5AH    00000H
+                                      FBB66H    00000H
                   @@DATA   r_acl_handler
-                                      FBB5AH    00000H
-                  @@DATA   @rom       FBB5AH    00000H
-         @@INIT                       FBB5AH    00006H  DSEG BASEP
-                  @@INIT   @cstart    FBB5AH    00000H
-                  @@INIT   r_main     FBB5AH    00002H
+                                      FBB66H    00000H
+                  @@DATA   r_rgb_handler
+                                      FBB66H    00000H
+                  @@DATA   @rom       FBB66H    00000H
+         @@INIT                       FBB66H    00006H  DSEG BASEP
+                  @@INIT   @cstart    FBB66H    00000H
+                  @@INIT   r_main     FBB66H    00002H
                   @@INIT   r_systeminit
-                                      FBB5CH    00000H
-                  @@INIT   r_cg_cgc   FBB5CH    00000H
+                                      FBB68H    00000H
+                  @@INIT   r_cg_cgc   FBB68H    00000H
                   @@INIT   r_cg_cgc_user
-                                      FBB5CH    00000H
+                                      FBB68H    00000H
                   @@INIT   r_cg_port
-                                      FBB5CH    00000H
+                                      FBB68H    00000H
                   @@INIT   r_cg_port_user
-                                      FBB5CH    00000H
+                                      FBB68H    00000H
                   @@INIT   r_cg_serial
-                                      FBB5CH    00000H
+                                      FBB68H    00000H
                   @@INIT   r_cg_serial_user
-                                      FBB5CH    00000H
+                                      FBB68H    00000H
                   @@INIT   r_cg_timer
-                                      FBB5CH    00000H
+                                      FBB68H    00000H
                   @@INIT   r_cg_timer_user
-                                      FBB5CH    00002H
-                  @@INIT   r_cg_wdt   FBB5EH    00000H
+                                      FBB68H    00002H
+                  @@INIT   r_cg_wdt   FBB6AH    00000H
                   @@INIT   r_cg_wdt_user
-                                      FBB5EH    00000H
+                                      FBB6AH    00000H
                   @@INIT   r_miscellaneous_functions
-                                      FBB5EH    00000H
+                                      FBB6AH    00000H
                   @@INIT   r_iic_beacon_handler
-                                      FBB5EH    00002H
+                                      FBB6AH    00002H
                   @@INIT   r_aes_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIT   r_module_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIT   r_nfc_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIT   r_iso14443_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIT   r_iso15693_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIT   r_acl_handler
-                                      FBB60H    00000H
-                  @@INIT   @rom       FBB60H    00000H
-         @@INIS                       FBB60H    00000H  DSEG UNITP
-                  @@INIS   @cstart    FBB60H    00000H
-                  @@INIS   r_main     FBB60H    00000H
+                                      FBB6CH    00000H
+                  @@INIT   r_rgb_handler
+                                      FBB6CH    00000H
+                  @@INIT   @rom       FBB6CH    00000H
+         @@INIS                       FBB6CH    00000H  DSEG UNITP
+                  @@INIS   @cstart    FBB6CH    00000H
+                  @@INIS   r_main     FBB6CH    00000H
                   @@INIS   r_systeminit
-                                      FBB60H    00000H
-                  @@INIS   r_cg_cgc   FBB60H    00000H
+                                      FBB6CH    00000H
+                  @@INIS   r_cg_cgc   FBB6CH    00000H
                   @@INIS   r_cg_cgc_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIS   r_cg_port
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIS   r_cg_port_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIS   r_cg_serial
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIS   r_cg_serial_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIS   r_cg_timer
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIS   r_cg_timer_user
-                                      FBB60H    00000H
-                  @@INIS   r_cg_wdt   FBB60H    00000H
+                                      FBB6CH    00000H
+                  @@INIS   r_cg_wdt   FBB6CH    00000H
                   @@INIS   r_cg_wdt_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIS   r_miscellaneous_functions
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIS   r_iic_beacon_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIS   r_aes_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIS   r_module_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIS   r_nfc_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIS   r_iso14443_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIS   r_iso15693_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INIS   r_acl_handler
-                                      FBB60H    00000H
-                  @@INIS   @rom       FBB60H    00000H
-         @@DATS                       FBB60H    00000H  DSEG UNITP
-                  @@DATS   @cstart    FBB60H    00000H
-                  @@DATS   r_main     FBB60H    00000H
+                                      FBB6CH    00000H
+                  @@INIS   r_rgb_handler
+                                      FBB6CH    00000H
+                  @@INIS   @rom       FBB6CH    00000H
+         @@DATS                       FBB6CH    00000H  DSEG UNITP
+                  @@DATS   @cstart    FBB6CH    00000H
+                  @@DATS   r_main     FBB6CH    00000H
                   @@DATS   r_systeminit
-                                      FBB60H    00000H
-                  @@DATS   r_cg_cgc   FBB60H    00000H
+                                      FBB6CH    00000H
+                  @@DATS   r_cg_cgc   FBB6CH    00000H
                   @@DATS   r_cg_cgc_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATS   r_cg_port
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATS   r_cg_port_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATS   r_cg_serial
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATS   r_cg_serial_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATS   r_cg_timer
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATS   r_cg_timer_user
-                                      FBB60H    00000H
-                  @@DATS   r_cg_wdt   FBB60H    00000H
+                                      FBB6CH    00000H
+                  @@DATS   r_cg_wdt   FBB6CH    00000H
                   @@DATS   r_cg_wdt_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATS   r_miscellaneous_functions
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATS   r_iic_beacon_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATS   r_aes_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATS   r_module_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATS   r_nfc_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATS   r_iso14443_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATS   r_iso15693_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATS   r_acl_handler
-                                      FBB60H    00000H
-                  @@DATS   @rom       FBB60H    00000H
-         @@INITL                      FBB60H    00000H  DSEG UNIT64KP
-                  @@INITL  @cstart    FBB60H    00000H
-                  @@INITL  r_main     FBB60H    00000H
+                                      FBB6CH    00000H
+                  @@DATS   r_rgb_handler
+                                      FBB6CH    00000H
+                  @@DATS   @rom       FBB6CH    00000H
+         @@INITL                      FBB6CH    00000H  DSEG UNIT64KP
+                  @@INITL  @cstart    FBB6CH    00000H
+                  @@INITL  r_main     FBB6CH    00000H
                   @@INITL  r_systeminit
-                                      FBB60H    00000H
-                  @@INITL  r_cg_cgc   FBB60H    00000H
+                                      FBB6CH    00000H
+                  @@INITL  r_cg_cgc   FBB6CH    00000H
                   @@INITL  r_cg_cgc_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INITL  r_cg_port
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INITL  r_cg_port_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INITL  r_cg_serial
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INITL  r_cg_serial_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INITL  r_cg_timer
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INITL  r_cg_timer_user
-                                      FBB60H    00000H
-                  @@INITL  r_cg_wdt   FBB60H    00000H
+                                      FBB6CH    00000H
+                  @@INITL  r_cg_wdt   FBB6CH    00000H
                   @@INITL  r_cg_wdt_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INITL  r_miscellaneous_functions
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INITL  r_iic_beacon_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INITL  r_aes_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INITL  r_module_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INITL  r_nfc_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INITL  r_iso14443_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INITL  r_iso15693_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@INITL  r_acl_handler
-                                      FBB60H    00000H
-                  @@INITL  @rom       FBB60H    00000H
-         @@DATAL                      FBB60H    00000H  DSEG UNIT64KP
-                  @@DATAL  @cstart    FBB60H    00000H
-                  @@DATAL  r_main     FBB60H    00000H
+                                      FBB6CH    00000H
+                  @@INITL  r_rgb_handler
+                                      FBB6CH    00000H
+                  @@INITL  @rom       FBB6CH    00000H
+         @@DATAL                      FBB6CH    00000H  DSEG UNIT64KP
+                  @@DATAL  @cstart    FBB6CH    00000H
+                  @@DATAL  r_main     FBB6CH    00000H
                   @@DATAL  r_systeminit
-                                      FBB60H    00000H
-                  @@DATAL  r_cg_cgc   FBB60H    00000H
+                                      FBB6CH    00000H
+                  @@DATAL  r_cg_cgc   FBB6CH    00000H
                   @@DATAL  r_cg_cgc_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATAL  r_cg_port
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATAL  r_cg_port_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATAL  r_cg_serial
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATAL  r_cg_serial_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATAL  r_cg_timer
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATAL  r_cg_timer_user
-                                      FBB60H    00000H
-                  @@DATAL  r_cg_wdt   FBB60H    00000H
+                                      FBB6CH    00000H
+                  @@DATAL  r_cg_wdt   FBB6CH    00000H
                   @@DATAL  r_cg_wdt_user
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATAL  r_miscellaneous_functions
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATAL  r_iic_beacon_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATAL  r_aes_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATAL  r_module_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATAL  r_nfc_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATAL  r_iso14443_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATAL  r_iso15693_handler
-                                      FBB60H    00000H
+                                      FBB6CH    00000H
                   @@DATAL  r_acl_handler
-                                      FBB60H    00000H
-                  @@DATAL  @rom       FBB60H    00000H
-         @@BITS                       FBB60H    00000H  BSEG
-                  @@BITS   @cstart    FBB60H.0  00000H.0
-                  @@BITS   r_main     FBB60H.0  00000H.0
+                                      FBB6CH    00000H
+                  @@DATAL  r_rgb_handler
+                                      FBB6CH    00000H
+                  @@DATAL  @rom       FBB6CH    00000H
+         @@BITS                       FBB6CH    00000H  BSEG
+                  @@BITS   @cstart    FBB6CH.0  00000H.0
+                  @@BITS   r_main     FBB6CH.0  00000H.0
                   @@BITS   r_systeminit
-                                      FBB60H.0  00000H.0
-                  @@BITS   r_cg_cgc   FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
+                  @@BITS   r_cg_cgc   FBB6CH.0  00000H.0
                   @@BITS   r_cg_cgc_user
-                                      FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
                   @@BITS   r_cg_port
-                                      FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
                   @@BITS   r_cg_port_user
-                                      FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
                   @@BITS   r_cg_serial
-                                      FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
                   @@BITS   r_cg_serial_user
-                                      FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
                   @@BITS   r_cg_timer
-                                      FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
                   @@BITS   r_cg_timer_user
-                                      FBB60H.0  00000H.0
-                  @@BITS   r_cg_wdt   FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
+                  @@BITS   r_cg_wdt   FBB6CH.0  00000H.0
                   @@BITS   r_cg_wdt_user
-                                      FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
                   @@BITS   r_miscellaneous_functions
-                                      FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
                   @@BITS   r_iic_beacon_handler
-                                      FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
                   @@BITS   r_aes_handler
-                                      FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
                   @@BITS   r_module_handler
-                                      FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
                   @@BITS   r_nfc_handler
-                                      FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
                   @@BITS   r_iso14443_handler
-                                      FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
                   @@BITS   r_iso15693_handler
-                                      FBB60H.0  00000H.0
+                                      FBB6CH.0  00000H.0
                   @@BITS   r_acl_handler
-                                      FBB60H.0  00000H.0
-* gap *                               FBB60H    04374H
+                                      FBB6CH.0  00000H.0
+                  @@BITS   r_rgb_handler
+                                      FBB6CH.0  00000H.0
+* gap *                               FBB6CH    04368H
          @@SEGREG                     FFED4H    00004H  DSEG AT
                   @@SEGREG @SEGREG    FFED4H    00004H
          @@RTARG0                     FFED8H    00008H  DSEG AT

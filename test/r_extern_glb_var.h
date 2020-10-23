@@ -54,6 +54,22 @@ extern volatile struct device
 		uint8_t Dummy:7;
 		uint16_t Ticks;
 	}Operation;
+	
+	
+	/**************** New Format ****************/
+	uint32_t UpTime;
+	
+	union status
+	{
+		struct
+		{
+			uint8_t SchedulerRun:1;
+			uint8_t Reset:1;
+			uint8_t Dummy:6;
+		}Specific;
+		uint8_t Whole;
+	}Status;
+	
 }Device;
 
 extern const uint8_t PrimaryAESKey[16];
@@ -349,6 +365,8 @@ extern volatile struct permissions
 	uint64_t GenerationTime;
 	accessactions ActionQueue[MAXIMUM_ACTIONS];
 }Permissions[MAXIMUM_USERS];
+
+extern volatile uint16_t rand0, rand1, rand2;
 
 /********************************************** Include Function protoypes DATA ******************************************/
 #include "r_function_prototype.h"

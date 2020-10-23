@@ -73,7 +73,7 @@
 uint8_t Parse_I2C_Beacon(uint8_t *request, uint16_t *requestlength, uint8_t *response, uint16_t *responselength);
 uint8_t Validate_IICA_Beacon_Header(uint8_t *buffer);
 void IICA_Beacon_Receive_Handler(uint8_t checksum);
-void IICA_Beacon_Parser_Handler(void);
+void IICA_Beacon_Parser_Handler(uint32_t timereference);
 
 /****************************************** Module Handler Functions ******************************************/
 void Module_Handler(uint8_t modulecode, uint8_t *request, uint8_t *requestlength, uint8_t *response, uint8_t *elapsedwrite);

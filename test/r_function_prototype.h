@@ -54,14 +54,17 @@ User definitions
 #include "r_beacon_handler.h"
 #include "r_aes_handler.h"
 #include "r_miscellaneous_functions.h"
+#include "r_rgb_handler.h"
 
 /********************************** Function Prototypes **********************************/
 void main(void);
 void R_Boot_Up(void);
-void Operation_Routine(void);
-void Untimed_Functions(void);
 void Fault_Recovery_Handler(void);
 void Device_Init(void);
+
+void Run_Scheduler(void);
+void Scheduler_Routine(uint32_t timereference);
+void Stop_Scheduler(void);
 
 /* End user code. Do not edit comment generated here */
 #endif

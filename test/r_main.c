@@ -69,19 +69,8 @@ void main(void)
     /* Start user code. Do not edit comment generated here */
     while (1U)
     { 
-        //R_WDT_Restart();
-	if(reset)
-	{
-		reset = 0U;
-		while(1U){}
-	}
-	R_WDT_Restart();
-	if(Device.Operation.Flag)
-	{
-		Device.Operation.Flag = 0U;
-		Operation_Routine();
-	}
-	Untimed_Functions();
+        R_WDT_Restart();
+	Scheduler_Routine(Device.UpTime);
     }
     /* End user code. Do not edit comment generated here */
 }
@@ -100,60 +89,12 @@ void R_MAIN_UserInit(void)
     EI();
     Debug_Init();
     Nfc.SearchProfile = 1U;
+    
+    Run_Scheduler();
     /* End user code. Do not edit comment generated here */
 }
 
 /* Start user code for adding. Do not edit comment generated here */
-/***********************************************************************************************************************
-* Function Name: R_MAIN_UserInit
-* Description  : This function adds user code before implementing main function.
-* Arguments    : None
-* Return Value : None
-***********************************************************************************************************************/
-void Operation_Routine(void)
-{
-	Device.Operation.Ticks++;
-		
-	R_WDT_Restart();
-	
-	if(!(Device.Operation.Ticks % 1U))	//5ms operations
-	{
-		ACL_Book_Keeping();
-		Nfc_Communication_Handler();
-		Nfc_Handler();
-	}
-	if(!(Device.Operation.Ticks % 2U))	//10ms operations
-	{
-		IICA_Beacon_Parser_Handler();
-	}
-	if(!(Device.Operation.Ticks % 10U))	//50ms operations
-	{
-		//
-	}
-	if(!(Device.Operation.Ticks % 20U))	//100ms operations
-	{
-		//Debug_Routine();
-		Check_Edge_Action_Notifications();
-		Check_Broadcast_Action_Notifications();
-	}
-	if(!(Device.Operation.Ticks % 200U))	//1s operations
-	{
-		Device.Operation.Ticks = 0U;
-		
-	}
-}
-
-/***********************************************************************************************************************
-* Function Name: R_MAIN_UserInit
-* Description  : This function adds user code before implementing main function.
-* Arguments    : None
-* Return Value : None
-***********************************************************************************************************************/
-void Untimed_Functions(void)
-{
-	//
-}
-
 /***********************************************************************************************************************
 * Function Name: R_MAIN_UserInit
 * Description  : This function adds user code before implementing main function.
@@ -194,351 +135,48 @@ void Debug_Init(void)
 * Arguments    : None
 * Return Value : None
 ***********************************************************************************************************************/
-void Debug_Routine(void)
-{
-	if(debug)
-	{	
-		debug = 0U;
-		/*
-		Permissions[1].ActionQueue[0] = 2;
-		Permissions[1].ActionQueue[1] = 3;
-		Permissions[1].ActionQueue[2] = 4;
-		Permissions[1].ActionQueue[3] = 5;
-		
-		Permissions[0].ActionQueue[0] = 1;
-		Permissions[0].ActionQueue[1] = 2;
-		
-		Permissions[2].ActionQueue[0] = 2;
-		Permissions[2].ActionQueue[1] = 5;
-		
-		Permissions[3].ActionQueue[0] = 4;
-		Permissions[3].ActionQueue[1] = 5;
-		Permissions[3].ActionQueue[2] = 6;
-		Permissions[3].ActionQueue[3] = 7;
-		
-		Attach_Action_Notifications(test, &testlength);
-		
-		/*volatile aclseacrhfilter filter;
-		volatile uint8_t request[100], response[100], numberofentries = 0U;
-		volatile uint8_t requestlength = 0U, responselength = 0U, modulecode = 0U;
-		volatile taginfo tempinfo;
-		volatile entrytoken temptoken;
-		
-		//Info
-		memset(&tempinfo, 0U, sizeof(taginfo));
-		memset(&temptoken, 0U, sizeof(entrytoken));
-		
-		tempinfo.UIDSize = 7U;
-		memcpy(request+requestlength, &tempinfo.UIDSize, sizeof(tempinfo.UIDSize));
-		requestlength += sizeof(tempinfo.UIDSize);
-		
-		memset(tempinfo.UID, 0xab, tempinfo.UIDSize);
-		memcpy(request+requestlength, &tempinfo.UID, tempinfo.UIDSize);
-		requestlength += tempinfo.UIDSize;
-		
-		tempinfo.Profile = NFC_ISO14443;
-		memcpy(request+requestlength, &tempinfo.Profile, sizeof(tempinfo.Profile));
-		requestlength += sizeof(tempinfo.Profile);
-		
-		tempinfo.SubProfile = MIFARE_DESFIRE_EV2;
-		memcpy(request+requestlength, &tempinfo.SubProfile, sizeof(tempinfo.SubProfile));
-		requestlength += sizeof(tempinfo.SubProfile);
-		
-		tempinfo.AvailableMemory = 888U;
-		memcpy(request+requestlength, &tempinfo.AvailableMemory, sizeof(tempinfo.AvailableMemory));
-		requestlength += sizeof(tempinfo.AvailableMemory);
-		
-		//Token
-		temptoken.UserID = 0x33;
-		memcpy(request+requestlength, &temptoken.UserID, sizeof(temptoken.UserID));
-		requestlength += sizeof(temptoken.UserID);
-		
-		memset(&temptoken.GenerationTime, 0xdd, sizeof(temptoken.GenerationTime));
-		memcpy(request+requestlength, &temptoken.GenerationTime, sizeof(temptoken.GenerationTime));
-		requestlength += sizeof(temptoken.GenerationTime);
-		
-		temptoken.Action = ACTION_VEHICLE_LOCK;
-		memcpy(request+requestlength, &temptoken.Action, sizeof(temptoken.Action));
-		requestlength += sizeof(temptoken.Action);
-		
-		temptoken.ActionRule.Specific.RisingEdge = 1U;
-		memcpy(request+requestlength, &temptoken.ActionRule.Whole, sizeof(temptoken.ActionRule.Whole));
-		requestlength += sizeof(temptoken.ActionRule.Whole);
-		
-		temptoken.Timeout = 9U;
-		memcpy(request+requestlength, &temptoken.Timeout, sizeof(temptoken.Timeout));
-		requestlength += sizeof(temptoken.Timeout);
-		
-		memset(temptoken.AuthCode, 0x65, sizeof(temptoken.AuthCode));
-		memcpy(request+requestlength, &temptoken.AuthCode, sizeof(temptoken.AuthCode));
-		requestlength += sizeof(temptoken.AuthCode);
-		
-		temptoken.GuideRule.Password32 = 1U;
-		memcpy(request+requestlength, &temptoken.GuideRule, sizeof(temptoken.GuideRule));
-		requestlength += sizeof(temptoken.GuideRule);
-		
-		memset(temptoken.Guide.Password32, 0xcc, 4U);	
-		memcpy(request+requestlength, temptoken.Guide.Password32, sizeof(temptoken.Guide.Password32));
-		requestlength += sizeof(temptoken.Guide.Password32);
-		
-		memset(temptoken.Guide.PasswordACK16, 0x22, 2U);
-		memcpy(request+requestlength, temptoken.Guide.PasswordACK16, sizeof(temptoken.Guide.PasswordACK16));
-		requestlength += sizeof(temptoken.Guide.PasswordACK16);
-		
-		
-		debug = 0U;
-		modulecode = NFC_ADD_ACL_ENTRY_MODULE_CODE;
-		Test_Module(modulecode, request, &requestlength, response, &responselength);
-		
-		NOP();
-		//////////////////////////////////////////////////////////////////////////
-		
-		filter.Type.Whole = 0U;
-		filter.Info.Whole = 0U;
-		filter.Token.Whole = 0U;
-		
-		
-		memset(request, 0U, sizeof(request));
-		memset(response, 0U, sizeof(response));
-		responselength = 0U;
-		requestlength = 0U;
-		memset(&tempinfo, 0U, sizeof(taginfo));
-		memset(&temptoken, 0U, sizeof(entrytoken));
-		
-		filter.Type.Specific.UseInfo = 0U;
-		filter.Type.Specific.UseToken = 1U;
-		filter.Token.Specific.Action = 1U;
-		
-		memcpy(request+requestlength, &filter, sizeof(filter));
-		requestlength += sizeof(filter);
-		
-		tempinfo.UIDSize = 7U;
-		memcpy(request+requestlength, &tempinfo.UIDSize, sizeof(tempinfo.UIDSize));
-		requestlength += sizeof(tempinfo.UIDSize);
-		
-		memset(tempinfo.UID, 0xab, tempinfo.UIDSize);
-		memcpy(request+requestlength, &tempinfo.UID, tempinfo.UIDSize);
-		requestlength += tempinfo.UIDSize;
-		
-		tempinfo.Profile = NFC_ISO14443;
-		memcpy(request+requestlength, &tempinfo.Profile, sizeof(tempinfo.Profile));
-		requestlength += sizeof(tempinfo.Profile);
-		
-		tempinfo.SubProfile = MIFARE_DESFIRE_EV2;
-		memcpy(request+requestlength, &tempinfo.SubProfile, sizeof(tempinfo.SubProfile));
-		requestlength += sizeof(tempinfo.SubProfile);
-		
-		tempinfo.AvailableMemory = 888U;
-		memcpy(request+requestlength, &tempinfo.AvailableMemory, sizeof(tempinfo.AvailableMemory));
-		requestlength += sizeof(tempinfo.AvailableMemory);
-		
-		//Token
-		temptoken.UserID = 0x33;
-		memcpy(request+requestlength, &temptoken.UserID, sizeof(temptoken.UserID));
-		requestlength += sizeof(temptoken.UserID);
-		
-		memset(&temptoken.GenerationTime, 0xdd, sizeof(temptoken.GenerationTime));
-		memcpy(request+requestlength, &temptoken.GenerationTime, sizeof(temptoken.GenerationTime));
-		requestlength += sizeof(temptoken.GenerationTime);
-		
-		temptoken.Action = ACTION_VEHICLE_LOCK;
-		memcpy(request+requestlength, &temptoken.Action, sizeof(temptoken.Action));
-		requestlength += sizeof(temptoken.Action);
-		
-		temptoken.ActionRule.Specific.RisingEdge = 1U;
-		memcpy(request+requestlength, &temptoken.ActionRule.Whole, sizeof(temptoken.ActionRule.Whole));
-		requestlength += sizeof(temptoken.ActionRule.Whole);
-		
-		temptoken.Timeout = 9U;
-		memcpy(request+requestlength, &temptoken.Timeout, sizeof(temptoken.Timeout));
-		requestlength += sizeof(temptoken.Timeout);
-		
-		memset(temptoken.AuthCode, 0x65, sizeof(temptoken.AuthCode));
-		memcpy(request+requestlength, &temptoken.AuthCode, sizeof(temptoken.AuthCode));
-		requestlength += sizeof(temptoken.AuthCode);
-		
-		temptoken.GuideRule.Password32 = 1U;
-		memcpy(request+requestlength, &temptoken.GuideRule, sizeof(temptoken.GuideRule));
-		requestlength += sizeof(temptoken.GuideRule);
-		
-		memset(temptoken.Guide.Password32, 0xcc, 4U);	
-		memcpy(request+requestlength, temptoken.Guide.Password32, sizeof(temptoken.Guide.Password32));
-		requestlength += sizeof(temptoken.Guide.Password32);
-		
-		memset(temptoken.Guide.PasswordACK16, 0x22, 2U);
-		memcpy(request+requestlength, temptoken.Guide.PasswordACK16, sizeof(temptoken.Guide.PasswordACK16));
-		requestlength += sizeof(temptoken.Guide.PasswordACK16);
-		
-		
-		modulecode = NFC_DELETE_ACL_ENTRY_MODULE_CODE;
-		Test_Module(modulecode, request, &requestlength, response, &responselength);
-		
-		NOP();
-		
-		///////////////////////////////////
-		
-		filter.Type.Whole = 0U;
-		filter.Info.Whole = 0U;
-		filter.Token.Whole = 0U;
-		
-		memset(request, 0U, sizeof(request));
-		memset(response, 0U, sizeof(response));
-		responselength = 0U;
-		requestlength = 0U;
-		memset(&tempinfo, 0U, sizeof(taginfo));
-		memset(&temptoken, 0U, sizeof(entrytoken));
-		
-		modulecode = NFC_CLEAR_ACL_TABLE_MODULE_CODE;
-		Test_Module(modulecode, request, &requestlength, response, &responselength);
-		NOP();
-		
-		
-		//////////////////////////////////
-		
-		filter.Type.Whole = 0U;
-		filter.Info.Whole = 0U;
-		filter.Token.Whole = 0U;
-		
-		memset(request, 0U, sizeof(request));
-		memset(response, 0U, sizeof(response));
-		responselength = 0U;
-		requestlength = 0U;
-		
-		numberofentries = 2U;
-		memcpy(request+requestlength, &numberofentries, sizeof(numberofentries));
-		requestlength += sizeof(numberofentries);
-		
-		//------------------------------------------------------------------------------
-		
-		memset(&tempinfo, 0U, sizeof(taginfo));
-		memset(&temptoken, 0U, sizeof(entrytoken));
-		
-		tempinfo.UIDSize = 7U;
-		memcpy(request+requestlength, &tempinfo.UIDSize, sizeof(tempinfo.UIDSize));
-		requestlength += sizeof(tempinfo.UIDSize);
-		
-		memset(tempinfo.UID, 0x69, tempinfo.UIDSize);
-		memcpy(request+requestlength, &tempinfo.UID, tempinfo.UIDSize);
-		requestlength += tempinfo.UIDSize;
-		
-		tempinfo.Profile = NFC_ISO14443;
-		memcpy(request+requestlength, &tempinfo.Profile, sizeof(tempinfo.Profile));
-		requestlength += sizeof(tempinfo.Profile);
-		
-		tempinfo.SubProfile = MIFARE_DESFIRE_EV2;
-		memcpy(request+requestlength, &tempinfo.SubProfile, sizeof(tempinfo.SubProfile));
-		requestlength += sizeof(tempinfo.SubProfile);
-		
-		tempinfo.AvailableMemory = 888U;
-		memcpy(request+requestlength, &tempinfo.AvailableMemory, sizeof(tempinfo.AvailableMemory));
-		requestlength += sizeof(tempinfo.AvailableMemory);
-		
-		//Token
-		temptoken.UserID = 0x33;
-		memcpy(request+requestlength, &temptoken.UserID, sizeof(temptoken.UserID));
-		requestlength += sizeof(temptoken.UserID);
-		
-		memset(&temptoken.GenerationTime, 0xdd, sizeof(temptoken.GenerationTime));
-		memcpy(request+requestlength, &temptoken.GenerationTime, sizeof(temptoken.GenerationTime));
-		requestlength += sizeof(temptoken.GenerationTime);
-		
-		temptoken.Action = ACTION_VEHICLE_LOCK;
-		memcpy(request+requestlength, &temptoken.Action, sizeof(temptoken.Action));
-		requestlength += sizeof(temptoken.Action);
-		
-		temptoken.ActionRule.Specific.RisingEdge = 1U;
-		memcpy(request+requestlength, &temptoken.ActionRule.Whole, sizeof(temptoken.ActionRule.Whole));
-		requestlength += sizeof(temptoken.ActionRule.Whole);
-		
-		temptoken.Timeout = 9U;
-		memcpy(request+requestlength, &temptoken.Timeout, sizeof(temptoken.Timeout));
-		requestlength += sizeof(temptoken.Timeout);
-		
-		memset(temptoken.AuthCode, 0x65, sizeof(temptoken.AuthCode));
-		memcpy(request+requestlength, &temptoken.AuthCode, sizeof(temptoken.AuthCode));
-		requestlength += sizeof(temptoken.AuthCode);
-		
-		temptoken.GuideRule.Password32 = 1U;
-		memcpy(request+requestlength, &temptoken.GuideRule, sizeof(temptoken.GuideRule));
-		requestlength += sizeof(temptoken.GuideRule);
-		
-		memset(temptoken.Guide.Password32, 0xcc, 4U);	
-		memcpy(request+requestlength, temptoken.Guide.Password32, sizeof(temptoken.Guide.Password32));
-		requestlength += sizeof(temptoken.Guide.Password32);
-		
-		memset(temptoken.Guide.PasswordACK16, 0x22, 2U);
-		memcpy(request+requestlength, temptoken.Guide.PasswordACK16, sizeof(temptoken.Guide.PasswordACK16));
-		requestlength += sizeof(temptoken.Guide.PasswordACK16);
-		
-		//------------------------------------------------------------------------------
+void Run_Scheduler(void)
+{	
+	Device.Status.Specific.SchedulerRun = 1U;
+	R_TAU0_Channel4_Start();
+	Scheduler_Routine(Device.UpTime);
+}
 
-		memset(&tempinfo, 0U, sizeof(taginfo));
-		memset(&temptoken, 0U, sizeof(entrytoken));
+/***********************************************************************************************************************
+* Function Name: R_MAIN_UserInit
+* Description  : This function adds user code before implementing main function.
+* Arguments    : None
+* Return Value : None
+***********************************************************************************************************************/
+void Scheduler_Routine(uint32_t timereference)
+{
+	if(Device.Status.Specific.SchedulerRun)
+	{
+		if(Device.Status.Specific.Reset) while(1U){}
 		
-		tempinfo.UIDSize = 7U;
-		memcpy(request+requestlength, &tempinfo.UIDSize, sizeof(tempinfo.UIDSize));
-		requestlength += sizeof(tempinfo.UIDSize);
+		ACL_Book_Keeping(timereference);
+		Nfc_Communication_Handler(timereference);
+		Nfc_Handler(timereference);
 		
-		memset(tempinfo.UID, 0xcd, tempinfo.UIDSize);
-		memcpy(request+requestlength, &tempinfo.UID, tempinfo.UIDSize);
-		requestlength += tempinfo.UIDSize;
+		IICA_Beacon_Parser_Handler(timereference);
 		
-		tempinfo.Profile = NFC_ISO14443;
-		memcpy(request+requestlength, &tempinfo.Profile, sizeof(tempinfo.Profile));
-		requestlength += sizeof(tempinfo.Profile);
+		Check_Edge_Action_Notifications(timereference);
+		Check_Broadcast_Action_Notifications(timereference);
 		
-		tempinfo.SubProfile = MIFARE_DESFIRE_EV2;
-		memcpy(request+requestlength, &tempinfo.SubProfile, sizeof(tempinfo.SubProfile));
-		requestlength += sizeof(tempinfo.SubProfile);
-		
-		tempinfo.AvailableMemory = 888U;
-		memcpy(request+requestlength, &tempinfo.AvailableMemory, sizeof(tempinfo.AvailableMemory));
-		requestlength += sizeof(tempinfo.AvailableMemory);
-		
-		//Token
-		temptoken.UserID = 0x33;
-		memcpy(request+requestlength, &temptoken.UserID, sizeof(temptoken.UserID));
-		requestlength += sizeof(temptoken.UserID);
-		
-		memset(&temptoken.GenerationTime, 0xdd, sizeof(temptoken.GenerationTime));
-		memcpy(request+requestlength, &temptoken.GenerationTime, sizeof(temptoken.GenerationTime));
-		requestlength += sizeof(temptoken.GenerationTime);
-		
-		temptoken.Action = ACTION_VEHICLE_LOCK;
-		memcpy(request+requestlength, &temptoken.Action, sizeof(temptoken.Action));
-		requestlength += sizeof(temptoken.Action);
-		
-		temptoken.ActionRule.Specific.RisingEdge = 1U;
-		memcpy(request+requestlength, &temptoken.ActionRule.Whole, sizeof(temptoken.ActionRule.Whole));
-		requestlength += sizeof(temptoken.ActionRule.Whole);
-		
-		temptoken.Timeout = 9U;
-		memcpy(request+requestlength, &temptoken.Timeout, sizeof(temptoken.Timeout));
-		requestlength += sizeof(temptoken.Timeout);
-		
-		memset(temptoken.AuthCode, 0x65, sizeof(temptoken.AuthCode));
-		memcpy(request+requestlength, &temptoken.AuthCode, sizeof(temptoken.AuthCode));
-		requestlength += sizeof(temptoken.AuthCode);
-		
-		temptoken.GuideRule.Password32 = 1U;
-		memcpy(request+requestlength, &temptoken.GuideRule, sizeof(temptoken.GuideRule));
-		requestlength += sizeof(temptoken.GuideRule);
-		
-		memset(temptoken.Guide.Password32, 0xcc, 4U);	
-		memcpy(request+requestlength, temptoken.Guide.Password32, sizeof(temptoken.Guide.Password32));
-		requestlength += sizeof(temptoken.Guide.Password32);
-		
-		memset(temptoken.Guide.PasswordACK16, 0x22, 2U);
-		memcpy(request+requestlength, temptoken.Guide.PasswordACK16, sizeof(temptoken.Guide.PasswordACK16));
-		requestlength += sizeof(temptoken.Guide.PasswordACK16);
-		
-		//------------------------------------------------------------------------------
-		
-		
-		modulecode = NFC_BULK_UPDATE_ACL_TABLE_MOCULE_CODE;
-		Test_Module(modulecode, request, &requestlength, response, &responselength);
-		NOP();*/
+		RGB_Hallucinate_Handler(timereference);
 	}
+}
+
+/***********************************************************************************************************************
+* Function Name: R_MAIN_UserInit
+* Description  : This function adds user code before implementing main function.
+* Arguments    : None
+* Return Value : None
+***********************************************************************************************************************/
+void Stop_Scheduler(void)
+{
+	Device.Status.Specific.SchedulerRun = 0U;
+	R_TAU0_Channel4_Stop();
 }
 
 /* End user code. Do not edit comment generated here */

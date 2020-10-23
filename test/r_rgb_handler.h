@@ -18,7 +18,7 @@
 ***********************************************************************************************************************/
 
 /***********************************************************************************************************************
-* File Name    : r_st95hf_handler.h
+* File Name    : r_loc_handler.h
 * Version      : CodeGenerator for RL78/G13 V2.05.01.04 [18 May 2018]
 * Device(s)    : R5F100FE
 * Tool-Chain   : CA78K0R
@@ -26,49 +26,14 @@
 * Creation Date: 10-05-2019
 ***********************************************************************************************************************/
 
-#ifndef _R_NFC_HANDLER_H
-#define _R_NFC_HANDLER_H
+#ifndef _R_RGB_HANDLER_H
+#define _R_RGB_HANDLER_H
 /* Start user code for function. Do not edit comment generated here */
-
-
 /*************************************** Macro Definitions ***************************************/
-#define MIFARE_UL_EV1_DEFAULT_PASSWORD "INTL"
-#define MIFARE_UL_EV1_DEFAULT_PASSWORD_ACKNOWLEDGEMENT "ID"
-
-/*************************************** Macro Definitions ***************************************/
-#define NFC_IRQ_IN P2.7
-#define NFC_IRQ_OUT P1.5
-#define NFC_HEAD_SIZE 2U
-#define NFC_RESULT_CODE_SIZE 1U
-#define NFC_RESPONSE_LENGTH_SIZE 1U
+//
 
 /*************************************** Function Prototypes ***************************************/
-void NFC_Init(void);
-void Nfc_Handler(uint32_t timereference);
-void Query_NFC_ID(void);
-void NFC_Request(uint8_t *command, uint8_t length);
-
-void Nfc_Communication_Handler(uint32_t timereference);
-void Nfc_Process_Handler(void);
-void Nfc_Profile_Switch(void);
-
-void ISO14443_Handler(void);
-void Exit_ISO14443_Handler(void);
-uint8_t ISO14443_Parser(uint8_t *buffer, uint8_t length);
-void Update_ISO14443_Flags(uint8_t *buffer, uint8_t length);
-
-void ISO15693_Handler(void);
-uint8_t ISO15693_Parser(uint8_t *buffer, uint8_t length);
-void Exit_ISO15693_Handler(void);
-
-void Test_Command(void);
-
-
-/*************************************** Function Prototypes ***************************************/
-uint8_t Tag_Handler(uint8_t *buffer, uint8_t length);
-
-
-
+void RGB_Hallucinate_Handler(uint32_t timereference);
 
 /* End user code. Do not edit comment generated here */
 #endif

@@ -112,10 +112,13 @@ void Delete_Expired_Entries(void)
 * Arguments    : None
 * Return Value : None
 ***********************************************************************************************************************/
-void ACL_Book_Keeping(void)
+void ACL_Book_Keeping(uint32_t timereference)
 {
-	Check_User_Permissions();
-	Delete_Expired_Entries();
+	if(Check_Scheduler_Run_Interval(timereference, 5U))
+	{
+		Check_User_Permissions();
+		Delete_Expired_Entries();
+	}
 }
 
 /***********************************************************************************************************************
@@ -670,68 +673,71 @@ void Update_Action_Notification_Queue(uint8_t userid, accessactions action)
 * Arguments    : None
 * Return Value : None
 ***********************************************************************************************************************/
-void Check_Edge_Action_Notifications(void)
-{	
-	volatile uint8_t index = 0;
-	
-	for(index=0; index<MAXIMUM_ACL_ENTRIES; index++)
+void Check_Edge_Action_Notifications(uint32_t timereference)
+{
+	if(Check_Scheduler_Run_Interval(timereference, 100U))
 	{
-		if((!ACLTable[index].Status.AbsenceTrigger) && (!ACLTable[index].Status.Presence) && (!ACLTable[index].Status.Auth))
-		{
-			ACLTable[index].Status.PresenceCount = 0U;
-			if(ACLTable[index].Status.Active)
-			{
-				if(ACLTable[index].Settings.Token.AbsenceTime)
-				{
-					ACLTable[index].Status.AbsenceCount = ACLTable[index].Settings.Token.AbsenceTime;
-					ACLTable[index].Status.AbsenceTrigger = 1U;
-				}
-				else
-				{
-					ACLTable[index].Status.Active = 0U;
-					ACLTable[index].Status.AbsenceCount = 0U;
-					ACLTable[index].Status.AbsenceTrigger = 0U;
-					Update_Action_Notification_Queue(ACLTable[index].Settings.Token.UserID, ACLTable[index].Settings.Token.AbsenceAction);
-				}
-			}
-		}
+		volatile uint8_t index = 0;
 		
-		else if((ACLTable[index].Status.PresenceCount == 0U) && (ACLTable[index].Status.Presence) && (ACLTable[index].Status.Auth))
+		for(index=0; index<MAXIMUM_ACL_ENTRIES; index++)
 		{
-			if(ACLTable[index].Settings.Token.PresenceTime)
-				ACLTable[index].Status.PresenceCount = ACLTable[index].Settings.Token.PresenceTime;
-			else
+			if((!ACLTable[index].Status.AbsenceTrigger) && (!ACLTable[index].Status.Presence) && (!ACLTable[index].Status.Auth))
 			{
-				ACLTable[index].Status.PresenceCount = 1U;
-				ACLTable[index].Status.Active = 1U;
-				Update_Action_Notification_Queue(ACLTable[index].Settings.Token.UserID, ACLTable[index].Settings.Token.PresenceAction);
+				ACLTable[index].Status.PresenceCount = 0U;
+				if(ACLTable[index].Status.Active)
+				{
+					if(ACLTable[index].Settings.Token.AbsenceTime)
+					{
+						ACLTable[index].Status.AbsenceCount = ACLTable[index].Settings.Token.AbsenceTime;
+						ACLTable[index].Status.AbsenceTrigger = 1U;
+					}
+					else
+					{
+						ACLTable[index].Status.Active = 0U;
+						ACLTable[index].Status.AbsenceCount = 0U;
+						ACLTable[index].Status.AbsenceTrigger = 0U;
+						Update_Action_Notification_Queue(ACLTable[index].Settings.Token.UserID, ACLTable[index].Settings.Token.AbsenceAction);
+					}
+				}
 			}
-		}
-				
-		else if((ACLTable[index].Status.PresenceCount > 1) && (ACLTable[index].Status.Presence) && (ACLTable[index].Status.Auth))
-			ACLTable[index].Status.PresenceCount--;
 			
-		else if((ACLTable[index].Status.PresenceCount == 1) && (ACLTable[index].Status.Presence) && (ACLTable[index].Status.Auth))
-		{
-			if(!ACLTable[index].Status.Active)
+			else if((ACLTable[index].Status.PresenceCount == 0U) && (ACLTable[index].Status.Presence) && (ACLTable[index].Status.Auth))
 			{
-				ACLTable[index].Status.Active = 1U;
-				if(ACLTable[index].Settings.Token.ActionRule.Specific.Broadcast)
-					ACLTable[index].Status.BroadcastCount = ACLTable[index].Settings.Token.PresenceTime;
+				if(ACLTable[index].Settings.Token.PresenceTime)
+					ACLTable[index].Status.PresenceCount = ACLTable[index].Settings.Token.PresenceTime;
 				else
+				{
+					ACLTable[index].Status.PresenceCount = 1U;
+					ACLTable[index].Status.Active = 1U;
 					Update_Action_Notification_Queue(ACLTable[index].Settings.Token.UserID, ACLTable[index].Settings.Token.PresenceAction);
+				}
 			}
-		}
-			
-		else if((ACLTable[index].Status.AbsenceCount > 1) && (!ACLTable[index].Status.Presence) && (!ACLTable[index].Status.Auth))
-			ACLTable[index].Status.AbsenceCount--;
-			
-		else if((ACLTable[index].Status.AbsenceCount == 1) && (!ACLTable[index].Status.Presence) && (!ACLTable[index].Status.Auth))
-		{
-			ACLTable[index].Status.Active = 0U;
-			ACLTable[index].Status.AbsenceCount = 0U;
-			ACLTable[index].Status.AbsenceTrigger = 0U;
-			Update_Action_Notification_Queue(ACLTable[index].Settings.Token.UserID, ACLTable[index].Settings.Token.AbsenceAction);
+					
+			else if((ACLTable[index].Status.PresenceCount > 1) && (ACLTable[index].Status.Presence) && (ACLTable[index].Status.Auth))
+				ACLTable[index].Status.PresenceCount--;
+				
+			else if((ACLTable[index].Status.PresenceCount == 1) && (ACLTable[index].Status.Presence) && (ACLTable[index].Status.Auth))
+			{
+				if(!ACLTable[index].Status.Active)
+				{
+					ACLTable[index].Status.Active = 1U;
+					if(ACLTable[index].Settings.Token.ActionRule.Specific.Broadcast)
+						ACLTable[index].Status.BroadcastCount = ACLTable[index].Settings.Token.PresenceTime;
+					else
+						Update_Action_Notification_Queue(ACLTable[index].Settings.Token.UserID, ACLTable[index].Settings.Token.PresenceAction);
+				}
+			}
+				
+			else if((ACLTable[index].Status.AbsenceCount > 1) && (!ACLTable[index].Status.Presence) && (!ACLTable[index].Status.Auth))
+				ACLTable[index].Status.AbsenceCount--;
+				
+			else if((ACLTable[index].Status.AbsenceCount == 1) && (!ACLTable[index].Status.Presence) && (!ACLTable[index].Status.Auth))
+			{
+				ACLTable[index].Status.Active = 0U;
+				ACLTable[index].Status.AbsenceCount = 0U;
+				ACLTable[index].Status.AbsenceTrigger = 0U;
+				Update_Action_Notification_Queue(ACLTable[index].Settings.Token.UserID, ACLTable[index].Settings.Token.AbsenceAction);
+			}
 		}
 	}
 }
@@ -742,31 +748,33 @@ void Check_Edge_Action_Notifications(void)
 * Arguments    : None
 * Return Value : None
 ***********************************************************************************************************************/
-void Check_Broadcast_Action_Notifications(void)
+void Check_Broadcast_Action_Notifications(uint32_t timereference)
 {
-	volatile uint8_t index = 0;
-	
-	for(index=0; index<MAXIMUM_ACL_ENTRIES; index++)
+	if(Check_Scheduler_Run_Interval(timereference, 100U))
 	{
-		if(ACLTable[index].Settings.Token.ActionRule.Specific.Broadcast)
+		volatile uint8_t index = 0;
+		
+		for(index=0; index<MAXIMUM_ACL_ENTRIES; index++)
 		{
-			if(ACLTable[index].Status.BroadcastCount)
+			if(ACLTable[index].Settings.Token.ActionRule.Specific.Broadcast)
 			{
-				ACLTable[index].Status.BroadcastCount--;
-				if(!ACLTable[index].Status.BroadcastCount)
-					Update_Action_Notification_Queue(ACLTable[index].Settings.Token.UserID, ACLTable[index].Settings.Token.PresenceAction);
-			}
-			else
-			{
-				if((ACLTable[index].Status.Active) && (!ACLTable[index].Status.AbsenceTrigger))
-					ACLTable[index].Status.BroadcastCount = ACLTable[index].Settings.Token.PresenceTime;
+				if(ACLTable[index].Status.BroadcastCount)
+				{
+					ACLTable[index].Status.BroadcastCount--;
+					if(!ACLTable[index].Status.BroadcastCount)
+						Update_Action_Notification_Queue(ACLTable[index].Settings.Token.UserID, ACLTable[index].Settings.Token.PresenceAction);
+				}
 				else
-					ACLTable[index].Status.BroadcastCount = 0;
+				{
+					if((ACLTable[index].Status.Active) && (!ACLTable[index].Status.AbsenceTrigger))
+						ACLTable[index].Status.BroadcastCount = ACLTable[index].Settings.Token.PresenceTime;
+					else
+						ACLTable[index].Status.BroadcastCount = 0;
+				}
 			}
 		}
 	}
 }
-
 
 /***********************************************************************************************************************
 * Function Name: 

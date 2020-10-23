@@ -63,17 +63,6 @@ volatile uint8_t operationcount = 0;
 __interrupt static void r_tau0_channel0_interrupt(void)
 {
     /* Start user code. Do not edit comment generated here */
-    R_TAU0_Channel0_Stop();
-    
-    Device.Information.UpTime++;
-    operationcount++;
-    if(operationcount == 5U)
-    {
-    	Device.Operation.Flag = 1U;
-	operationcount = 0U;
-    }
-    
-    R_TAU0_Channel0_Start();
     /* End user code. Do not edit comment generated here */
 }
 
@@ -122,6 +111,21 @@ __interrupt static void r_tau0_channel3_interrupt(void)
 __interrupt static void r_tau0_channel4_interrupt(void)
 {
     /* Start user code. Do not edit comment generated here */
+    
+    R_TAU0_Channel4_Stop();
+    
+    Device.Information.UpTime++;
+    operationcount++;
+    if(operationcount == 5U)
+    {
+    	Device.Operation.Flag = 1U;
+	operationcount = 0U;
+    }
+    
+	Device.UpTime++;
+    
+    R_TAU0_Channel4_Start();
+    
     /* End user code. Do not edit comment generated here */
 }
 

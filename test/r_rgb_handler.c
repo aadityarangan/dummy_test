@@ -14,16 +14,16 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2011, 2018 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2011, 2019 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
 
 /***********************************************************************************************************************
-* File Name    : r_st95hf_handler.c
-* Version      : CodeGenerator for RL78/G14 V2.05.03.02 [06 Nov 2018]
-* Device(s)    : R5F104BA
+* File Name    : r_cg_serial_user.c
+* Version      : CodeGenerator for RL78/G14 V2.05.04.02 [20 Nov 2019]
+* Device(s)    : R5F104BC
 * Tool-Chain   : CA78K0R
-* Description  : This file implements device driver for TAU module.
-* Creation Date: 25-11-2019
+* Description  : This file implements device driver for Serial module.
+* Creation Date: 31-01-2020
 ***********************************************************************************************************************/
 
 /***********************************************************************************************************************
@@ -39,6 +39,7 @@ Includes
 /* Start user code for include. Do not edit comment generated here */
 #include "r_extern_glb_var.h"
 /* End user code. Do not edit comment generated here */
+#include "r_cg_userdefine.h"
 
 /***********************************************************************************************************************
 Global variables and functions
@@ -53,111 +54,14 @@ Global variables and functions
 * Arguments    : None
 * Return Value : None
 ***********************************************************************************************************************/
-uint16_t Compute_CRC16(uint16_t calculated_crc, uint8_t *data, uint16_t size)
+void RGB_Hallucinate_Handler(uint32_t timereference)
 {
-	uint16_t temps;
-	
-	R_WDT_Restart();
-	
-	for (temps = 0 ; temps < size ; temps ++)
+	if(Check_Scheduler_Run_Interval(timereference, 1000U))
 	{
-		uint8_t i = 8;
-		
-		calculated_crc = calculated_crc ^ (unsigned short)*data++ << 8;
-		
-		do
-		{
-			if (calculated_crc & 0x8000)
-				calculated_crc = calculated_crc << 1 ^ 0x1021;
-			else
-				calculated_crc = calculated_crc << 1;
-		}
-		while (--i);
+		TDR01 = (uint16_t)rand();
+		TDR02 = (uint16_t)rand();
+		TDR03 = (uint16_t)rand();
 	}
-	
-	return calculated_crc;
-}
-
-/***********************************************************************************************************************
-* Function Name: 
-* Description  : This function adds user code before implementing main function.
-* Arguments    : None
-* Return Value : None
-***********************************************************************************************************************/
-uint8_t Checksum8(uint8_t *datapointer, uint16_t length)
-{
-	uint8_t checksum = 0U;
-	uint16_t ckcount = 0U;
-
-	R_WDT_Restart();
-	
-	checksum = 0;
-	for(ckcount=0; ckcount<length; ckcount++)
-	{
-		checksum += *(datapointer+ckcount);
-	}
-	
-	return (uint8_t)checksum;
-}
-
-/***********************************************************************************************************************
-* Function Name: 
-* Description  : 
-* Arguments    : 
-* Return Value : 
-***********************************************************************************************************************/
-uint16_t Create_Rand_Seed(uint8_t *buffer, uint16_t length)
-{
-	volatile uint8_t count = 0;
-	volatile uint16_t seed = 0;
-	
-	if(!(length%2U))
-	{
-		for(count=1; count<length; count+=2)
-		{
-			seed += (((uint16_t)*(buffer+(count-1)) << 8U) | ((uint16_t)*(buffer+count)));
-		}
-	}
-	
-	return seed;
-}
-
-/***********************************************************************************************************************
-* Function Name: 
-* Description  : 
-* Arguments    : 
-* Return Value : 
-***********************************************************************************************************************/
-uint8_t Check_In_Range(uint8_t element, uint8_t *buffer, uint8_t buffersize)
-{
-	volatile uint8_t status = 0U;
-	
-	while(buffersize--)
-	{
-		if(element == (*(buffer+buffersize)))
-		{
-			status = 1U;
-			break;
-		}
-	}
-	
-	return status;
-}
-
-/***********************************************************************************************************************
-* Function Name: 
-* Description  : 
-* Arguments    : 
-* Return Value : 
-***********************************************************************************************************************/
-uint8_t Check_Scheduler_Run_Interval(uint32_t timereference, uint32_t interval)
-{
-	uint8_t status = 1U;
-	
-	if(timereference%interval)
-		status = 0U;
-		
-	return status;
 }
 
 /* End user code. Do not edit comment generated here */

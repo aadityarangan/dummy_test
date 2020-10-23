@@ -42,5 +42,7 @@ uint16_t Compute_CRC16(uint16_t calculated_crc, uint8_t *data, uint16_t size);
 uint16_t Create_Rand_Seed(uint8_t *buffer, uint16_t length);
 uint8_t Check_In_Range(uint8_t element, uint8_t *buffer, uint8_t buffersize);
 
+uint8_t Check_Scheduler_Run_Interval(uint32_t timereference, uint32_t interval);
+
 /* End user code. Do not edit comment generated here */
 #endif
